@@ -22,6 +22,6 @@ npm run dev
 
 ## Despliegue
 
-Producción: https://educai-sitio.vercel.app (proyecto `educai-sitio` en Vercel). Para volver a desplegar desde la terminal: `npx vercel deploy --prod`.
+Producción: https://educaiapp.vercel.app (proyecto `educai-sitio` en Vercel; la dirección anterior, https://educai-sitio.vercel.app, sigue funcionando). Para volver a desplegar desde la terminal: `npx vercel deploy --prod`.
 
-Pensado para Vercel. Las URL absolutas (canonical, sitemap, Open Graph) salen de `NEXT_PUBLIC_SITE_URL` si está definida, si no del dominio de producción de Vercel. Cuando haya dominio propio, conviene definir `NEXT_PUBLIC_SITE_URL`.
+Pensado para Vercel. Las URL absolutas (canonical, sitemap, Open Graph) salen de `NEXT_PUBLIC_SITE_URL` si está definida, si no del dominio de producción de Vercel. En Vercel, `NEXT_PUBLIC_SITE_URL` está definida en producción como `https://educaiapp.vercel.app`; si cambia la dirección, hay que actualizarla ahí.
