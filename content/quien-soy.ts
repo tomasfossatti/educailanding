@@ -24,12 +24,14 @@ export const projects = {
       title: "Espacio IDI",
       text: "Una comunidad de estudiantes que pone en práctica lo que aprende resolviendo problemas reales de empresas locales a través de Innovatones, con equipos multidisciplinarios y tiempo limitado.",
       link: null,
+      photoCaption: "Explicando Espacio IDI en el stand de Feria21, Universidad Siglo 21, 2026.",
     },
     {
       label: "Startup ed-tech · Docentes",
       title: "Educai",
       text: "Los estudiantes estudian con un tutor de IA basado en los materiales de la materia, y el docente ve patrones del grupo sobre qué preguntas se repiten para decidir qué hacer en clase.",
       link: "Conocer el producto",
+      photoCaption: "Presentando Educai en Feria21, Universidad Siglo 21, 2025.",
     },
   ],
 };
@@ -47,14 +49,18 @@ export const talks = {
     text: "Presenté Educai en Feria21 Tech 2025, en la Universidad Siglo 21, en el congreso Innova Educa 21 y en una sesión de Meet the mentors con mentores de Endeavor.",
     captions: {
       stand: "Stand de Educai en Feria21 Tech 2025, Universidad Siglo 21.",
-      visitantes: "Conversando con visitantes en Feria21 Tech 2025.",
-      mentors: "Meet the mentors, con mentores de Endeavor.",
+      mentors: "Conversando sobre Educai en Meet the mentors, Endeavor, 2025.",
     },
   },
   congress: {
     label: "Congreso Innova Educa 21",
     title: "Póster con los resultados del test de Educai",
     link: "Ver los resultados",
+    captions: {
+      cartel: "Con Educai en Innova Educa 2025.",
+      poster: "Presentando el afiche de la investigación, Innova Educa 21, 2026.",
+      tonucci: "Con Francesco Tonucci, Innova Educa 2025.",
+    },
   },
   interview: {
     label: "Entrevista · 4 de junio de 2025",

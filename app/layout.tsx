@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     siteName: "Educai",
     images: [
       {
-        url: PHOTOS.tedxEncendedorHero.src,
-        width: PHOTOS.tedxEncendedorHero.width,
-        height: PHOTOS.tedxEncendedorHero.height,
-        alt: PHOTOS.tedxEncendedorHero.alt,
+        url: PHOTOS.tedxEnEscena.src,
+        width: PHOTOS.tedxEnEscena.width,
+        height: PHOTOS.tedxEnEscena.height,
+        alt: PHOTOS.tedxEnEscena.alt,
       },
     ],
   },

@@ -1263,8 +1263,39 @@ code,
   object-position: top;
 }
 
+.photo--tall {
+  aspect-ratio: 3 / 4;
+  object-position: top;
+}
+
 .photo--landscape {
   aspect-ratio: 3 / 2;
+}
+
+.photo--square {
+  aspect-ratio: 1 / 1;
+}
+
+.photo-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--column-gap);
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .photo-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photo-row > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.peer > .photo-figure,
+.peer > div:has(> .photo) {
+  margin-bottom: var(--space-5);
 }
 
 .photo-figure figcaption {
