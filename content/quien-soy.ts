@@ -3,6 +3,7 @@ export const hero = {
   subtitle:
     "Soy hijo y nieto de docentes. Vivo la educación desde adentro y construyo experiencias para que el aula tenga lo que el celular no te da.",
   facts: ["Emprendedor", "Estudiante", "TEDx", "Córdoba, Argentina"],
+  personalSite: "Ver mi sitio personal",
 };
 
 export const perspective = {

@@ -2,10 +2,16 @@ export const FORM_URL = "https://forms.gle/H1VRZcY6WzL2wMh96";
 export const INSTAGRAM_URL = "https://www.instagram.com/tomasfossatti_/";
 export const EMAIL = "tomas.fossatti01@gmail.com";
 export const YOUTUBE_TEDX_URL = "https://www.youtube.com/watch?v=n1LSi7t5WKs";
+export const PERSONAL_SITE_URL = "https://tomasfossatti.vercel.app";
 
 export const PILOT_CTA = "Sumate al piloto 2027";
 export const NAV_CTA = "Sumarme al piloto 2027";
-export const FOOTER_TEXT = "Fundado por Tomás Fossatti en Córdoba, Argentina";
+/** Pie de página: el nombre enlaza al sitio personal de Tomás. */
+export const FOOTER = {
+  before: "Fundado por ",
+  name: "Tomás Fossatti",
+  after: " en Córdoba, Argentina",
+};
 
 export const ROUTES = {
   inicio: "/",

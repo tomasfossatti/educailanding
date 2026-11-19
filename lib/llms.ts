@@ -53,6 +53,7 @@ export function buildLlmsTxt() {
       `Piloto 2027 para docentes e instituciones: ${FORM_URL}`,
       `Correo: ${EMAIL}`,
       `Instagram de Educai: ${PROFILES.educaiInstagram}`,
+      `Sitio personal de Tomás Fossatti: ${PROFILES.tomasWebsite}`,
       `LinkedIn de Tomás Fossatti: ${PROFILES.tomasLinkedin}`,
     ]),
     heading(2, "Opcional"),

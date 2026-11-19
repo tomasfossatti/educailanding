@@ -1,4 +1,4 @@
-import { INSTAGRAM_URL, YOUTUBE_TEDX_URL } from "./site";
+import { INSTAGRAM_URL, PERSONAL_SITE_URL, YOUTUBE_TEDX_URL } from "./site";
 
 /**
  * Fecha de la última revisión de los contenidos (AAAA-MM-DD).
@@ -15,7 +15,7 @@ export const PROFILES = {
   educaiInstagram: "https://www.instagram.com/educai__/",
   tomasInstagram: INSTAGRAM_URL,
   tomasLinkedin: "https://www.linkedin.com/in/tomas-fossatti-ing/",
-  tomasWebsite: "https://tomasfossatti.vercel.app",
+  tomasWebsite: PERSONAL_SITE_URL,
   tedx: YOUTUBE_TEDX_URL,
 };
 

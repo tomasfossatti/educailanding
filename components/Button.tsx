@@ -45,6 +45,13 @@ export function Button({ href, variant = "primary", size = "default", children }
 }
 
 export function TextLink({ href, children }: { href: string; children: ReactNode }) {
+  if (isExternal(href)) {
+    return (
+      <a className="text-link" href={href} target="_blank" rel="noopener">
+        {children}
+      </a>
+    );
+  }
   return (
     <Link className="text-link" href={href}>
       {children}

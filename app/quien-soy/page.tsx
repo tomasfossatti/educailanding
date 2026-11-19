@@ -7,7 +7,7 @@ import { Section, SectionHead } from "@/components/Section";
 import { contact, hero, perspective, projects, talks } from "@/content/quien-soy";
 import { pageMetadata } from "@/lib/seo";
 import { aboutGraph } from "@/lib/structured-data";
-import { EMAIL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
+import { EMAIL, PERSONAL_SITE_URL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("quienSoy", ROUTES.quienSoy);
 
@@ -22,6 +22,9 @@ export default function QuienSoyPage() {
             <h1 className="display">{hero.title}</h1>
             <p className="lede">{hero.subtitle}</p>
             <p className="secondary mt-8">{hero.facts.join(" · ")}</p>
+            <p className="mt-8">
+              <TextLink href={PERSONAL_SITE_URL}>{hero.personalSite}</TextLink>
+            </p>
           </div>
           <PhotoFrame
             photo={PHOTOS.tedxEnEscena}
