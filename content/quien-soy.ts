@@ -40,6 +40,10 @@ export const talks = {
   title: "Ideas puestas en conversación",
   tedx: {
     label: "Charla TEDx · 6 de noviembre de 2025",
+    /** Para los datos estructurados del video. */
+    date: "2025-11-06",
+    event: "TEDxUniversidad Siglo 21",
+    venue: "Universidad Siglo 21",
     title: "AI in the classroom: From fear to replacement",
     text: "Una charla en TEDxUniversidad Siglo 21 sobre el futuro del aprendizaje, la transformación del aula y el desafío de crear experiencias educativas que motiven y vayan más allá de transmitir contenidos.",
     cta: "Ver la charla en YouTube",

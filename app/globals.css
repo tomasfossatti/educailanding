@@ -1302,6 +1302,26 @@ code,
   margin-top: var(--space-3);
 }
 
+/* Preguntas frecuentes */
+.faq__item {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--border-default);
+}
+
+.faq__item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.faq__item dt {
+  font-weight: var(--weight-semibold);
+}
+
+.faq__item dd {
+  margin-top: var(--space-2);
+  max-width: 40em;
+}
+
 /* ==========================================================================
    Cierre de página
    ========================================================================== */

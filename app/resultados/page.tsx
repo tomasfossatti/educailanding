@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { AdoptionBars, ApprovalBars, RatingRange } from "@/components/Bars";
 import { Closing } from "@/components/Closing";
 import { Section, SectionHead } from "@/components/Section";
@@ -12,30 +13,30 @@ import {
   observations,
   rating,
 } from "@/content/resultados";
+import { CONTENT_UPDATED, UPDATED_LABEL } from "@/content/seo";
+import { pageMetadata, updatedMonth } from "@/lib/seo";
+import { resultsGraph } from "@/lib/structured-data";
 import { FORM_URL, PILOT_CTA, ROUTES } from "@/content/site";
 
-const title = "Resultados del test";
-const description =
-  "Qué pasó durante dos meses en una materia universitaria y en una escuela de robótica.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: ROUTES.resultados },
-  openGraph: { title, description, url: ROUTES.resultados },
-};
+export const metadata: Metadata = pageMetadata("resultados", ROUTES.resultados);
 
 export default function ResultadosPage() {
   const [before, after] = approvals.bars;
 
   return (
     <>
+      <JsonLd data={resultsGraph()} />
       {/* Apertura: la pregunta y la evidencia principal en la misma vista */}
       <Section opening>
         <div className="grid">
           <div className="d-9 stack">
             <h1 className="title">{intro.title}</h1>
             <p className="lede">{intro.subtitle}</p>
+            <p className="meta">
+              <time dateTime={CONTENT_UPDATED}>
+                {UPDATED_LABEL} {updatedMonth()}
+              </time>
+            </p>
           </div>
         </div>
 

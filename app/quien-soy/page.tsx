@@ -1,30 +1,20 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { Button, TextLink } from "@/components/Button";
 import { Closing } from "@/components/Closing";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import { Section, SectionHead } from "@/components/Section";
 import { contact, hero, perspective, projects, talks } from "@/content/quien-soy";
+import { pageMetadata } from "@/lib/seo";
+import { aboutGraph } from "@/lib/structured-data";
 import { EMAIL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
 
-const title = "Tomás Fossatti";
-const description =
-  "Fundador de Educai. Hijo y nieto de docentes, emprendedor y estudiante en Córdoba, Argentina.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: ROUTES.quienSoy },
-  openGraph: {
-    title,
-    description,
-    url: ROUTES.quienSoy,
-    type: "profile",
-  },
-};
+export const metadata: Metadata = pageMetadata("quienSoy", ROUTES.quienSoy);
 
 export default function QuienSoyPage() {
   return (
     <>
+      <JsonLd data={aboutGraph()} />
       {/* Apertura */}
       <Section opening>
         <div className="grid opening">

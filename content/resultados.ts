@@ -35,7 +35,8 @@ export const approvals = {
   ],
   /** Se muestra como «+11 aprobados más», calculado a partir de las barras. */
   deltaSuffix: "aprobados más que en el 1.er parcial",
-  reading: "La aprobación fue mayor y coincide con Educai, sin atribución causal.",
+  reading:
+    "En la materia universitaria, 44 de 47 estudiantes aprobaron el 2.º parcial con Educai disponible, contra 33 de 47 en el 1.er parcial. Es una observación sin grupo control: la mejora coincide con Educai, pero no se la atribuimos.",
 };
 
 export const adoption = {
