@@ -3,7 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { PHOTOS, SITE_URL } from "@/content/site";
+import { JsonLd } from "@/components/JsonLd";
+import { ORGANIZATION, PAGES, SITE_LOCALE, SITE_NAME } from "@/content/seo";
+import { ROUTES, SITE_URL } from "@/content/site";
+import { siteGraph } from "@/lib/structured-data";
 import "./globals.css";
 
 const geist = Geist({
@@ -20,21 +23,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Educai: tutor de IA para el aula",
-  description:
-    "Educai convierte las conversaciones de estudio en información útil para que el docente decida mejor sus clases.",
+  title: { default: PAGES.inicio.title, template: `%s | ${SITE_NAME}` },
+  description: PAGES.inicio.description,
+  applicationName: SITE_NAME,
+  category: "education",
+  authors: [{ name: "Tomás Fossatti", url: ROUTES.quienSoy }],
+  creator: "Tomás Fossatti",
+  publisher: ORGANIZATION.name,
   openGraph: {
     type: "website",
-    locale: "es_AR",
-    siteName: "Educai",
-    images: [
-      {
-        url: PHOTOS.tedxEncendedorHero.src,
-        width: PHOTOS.tedxEncendedorHero.width,
-        height: PHOTOS.tedxEncendedorHero.height,
-        alt: PHOTOS.tedxEncendedorHero.alt,
-      },
-    ],
+    locale: SITE_LOCALE.replace("-", "_"),
+    siteName: SITE_NAME,
+  },
+  twitter: { card: "summary_large_image" },
+  alternates: {
+    types: { "text/plain": [{ url: "/llms.txt", title: "Resumen de Educai para modelos de lenguaje" }] },
   },
 };
 
@@ -47,7 +50,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es" className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang={SITE_LOCALE} className={`${geist.variable} ${geistMono.variable}`}>
       <body>
         <a className="skip-link" href="#contenido">
           Saltar al contenido
@@ -55,6 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
+        <JsonLd data={siteGraph()} />
       </body>
     </html>
   );

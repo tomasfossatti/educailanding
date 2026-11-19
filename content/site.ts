@@ -2,10 +2,16 @@ export const FORM_URL = "https://forms.gle/H1VRZcY6WzL2wMh96";
 export const INSTAGRAM_URL = "https://www.instagram.com/tomasfossatti_/";
 export const EMAIL = "tomas.fossatti01@gmail.com";
 export const YOUTUBE_TEDX_URL = "https://www.youtube.com/watch?v=n1LSi7t5WKs";
+export const PERSONAL_SITE_URL = "https://tomasfossatti.vercel.app";
 
 export const PILOT_CTA = "Sumate al piloto 2027";
 export const NAV_CTA = "Sumarme al piloto 2027";
-export const FOOTER_TEXT = "Fundado por Tomás Fossatti en Córdoba, Argentina";
+/** Pie de página: el nombre enlaza al sitio personal de Tomás. */
+export const FOOTER = {
+  before: "Fundado por ",
+  name: "Tomás Fossatti",
+  after: " en Córdoba, Argentina",
+};
 
 export const ROUTES = {
   inicio: "/",
@@ -41,18 +47,22 @@ export type Photo = {
   alt: string;
 };
 
+/**
+ * Fotos de Tomás tomadas del sitio personal (repo landing-tomas-fossatti),
+ * con los mismos textos alternativos que usa ese sitio.
+ */
 export const PHOTOS = {
-  tedxEncendedorHero: {
-    src: "/photos/tedx-encendedor.jpg",
-    width: 480,
-    height: 853,
-    alt: "Tomás Fossatti durante su charla TEDx",
+  tedxEnEscena: {
+    src: "/photos/tedx-en-escena.webp",
+    width: 720,
+    height: 960,
+    alt: "Tomás Fossatti dando su charla TEDx en la Universidad Siglo 21",
   },
-  tedxEscenario: {
-    src: "/photos/tedx-escenario.jpg",
-    width: 480,
-    height: 860,
-    alt: "Expositor con los brazos abiertos sobre el escenario de TEDx",
+  tedxCharla: {
+    src: "/photos/tedx-charla.webp",
+    width: 540,
+    height: 720,
+    alt: "Tomás Fossatti hablando en su charla TEDx en la Universidad Siglo 21",
   },
   feria21Stand: {
     src: "/photos/feria21-stand.jpg",
@@ -60,16 +70,40 @@ export const PHOTOS = {
     height: 853,
     alt: "Dos estudiantes junto al stand de Educai en Feria21 Tech, de la Universidad Siglo 21",
   },
-  feria21Visitantes: {
-    src: "/photos/feria21-visitantes.jpg",
-    width: 480,
-    height: 319,
-    alt: "Conversación con visitantes durante Feria21 Tech",
+  feria21Presentacion: {
+    src: "/photos/educai-feria21-presentacion-2025.webp",
+    width: 1000,
+    height: 1000,
+    alt: "Tomás Fossatti explicando Educai a un grupo de personas en Feria21",
   },
   meetTheMentors: {
-    src: "/photos/meet-the-mentors.jpg",
-    width: 480,
-    height: 319,
-    alt: "Conversación con un mentor en una sesión de Meet the mentors",
+    src: "/photos/meet-the-mentors-endeavor.webp",
+    width: 800,
+    height: 533,
+    alt: "Tomás Fossatti conversando con un mentor en Meet the Mentors, de Endeavor",
+  },
+  innovaEducaCartel: {
+    src: "/photos/innova-educa-2025-educai-cartel.webp",
+    width: 900,
+    height: 1200,
+    alt: "Tomás Fossatti junto al cartel de Innova Educa 21, mostrando Educai en su computadora",
+  },
+  innovaEducaPoster: {
+    src: "/photos/innova-educa-2026-presentacion.webp",
+    width: 464,
+    height: 618,
+    alt: "Tomás Fossatti presentando el póster de la investigación sobre Educai en Innova Educa 21",
+  },
+  tonucci: {
+    src: "/photos/tonucci.webp",
+    width: 900,
+    height: 1200,
+    alt: "Tomás Fossatti junto a Francesco Tonucci",
+  },
+  espacioIdiStand: {
+    src: "/photos/espacio-idi-feria21-2026-stand.webp",
+    width: 800,
+    height: 800,
+    alt: "Tomás Fossatti explicando Espacio IDI a un grupo de estudiantes en el stand de Feria21",
   },
 } satisfies Record<string, Photo>;

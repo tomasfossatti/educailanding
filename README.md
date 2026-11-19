@@ -18,10 +18,19 @@ npm run dev
 - Colores, tipografías y espacios: los tokens están al principio de `app/globals.css`, con su versión para modo oscuro justo debajo (se activa sola según el sistema). El sitio es monocromático: `--accent` vale lo mismo que el color del texto y se usa en botones y en la serie destacada de los gráficos.
 - Tipografía: Geist para todo el texto y Geist Mono solo para identificadores técnicos (por ejemplo `NO_DATA` o `DRAFT`).
 - Grilla: 12 columnas en escritorio, 6 en tablet y 4 en celular (`.grid` con las clases `d-*` y `t-*`).
-- Fotos: `public/photos/`.
+- Fotos: `public/photos/`, con su catálogo (tamaño y texto alternativo) en `PHOTOS` de `content/site.ts`. Las fotos de Tomás salen del sitio personal (repo `landing-tomas-fossatti`, carpeta `public/images/registro/`).
+
+## SEO y GEO
+
+- Títulos, descripciones, perfiles públicos y la fecha de actualización: `content/seo.ts`. **Cuando cambies textos o datos, actualizá `CONTENT_UPDATED`**: se usa en el sitemap, en los datos estructurados y en «Actualizado en…».
+- Preguntas frecuentes del inicio: `faq` en `content/inicio.ts` (también se publican como datos estructurados `FAQPage`).
+- Datos estructurados (schema.org): `lib/structured-data.ts`. Organización, sitio y fundador van en todas las páginas; cada página suma lo suyo.
+- Imágenes para compartir (1200 × 630): `opengraph-image.tsx` en cada ruta, con el diseño de `lib/og.tsx` y la tipografía de `assets/fonts/` (Geist, licencia OFL).
+- `/llms.txt` y `/llms-full.txt`: resumen y texto completo para modelos de lenguaje, generados desde `content/` por `lib/llms.ts`.
+- `educai-sitio.vercel.app` redirige con 308 a la dirección de producción (se configura en Vercel, en Domains).
 
 ## Despliegue
 
-Producción: https://educaiapp.vercel.app (proyecto `educai-sitio` en Vercel; la dirección anterior, https://educai-sitio.vercel.app, sigue funcionando). Para volver a desplegar desde la terminal: `npx vercel deploy --prod`.
+Producción: https://educaiapp.vercel.app (proyecto `educai-sitio` en Vercel; la dirección anterior, https://educai-sitio.vercel.app, sigue funcionando). Cada merge a `main` se despliega solo en producción. Para desplegar a mano: `npx vercel deploy --prod`.
 
 Pensado para Vercel. Las URL absolutas (canonical, sitemap, Open Graph) salen de `NEXT_PUBLIC_SITE_URL` si está definida, si no del dominio de producción de Vercel. En Vercel, `NEXT_PUBLIC_SITE_URL` está definida en producción como `https://educaiapp.vercel.app`; si cambia la dirección, hay que actualizarla ahí.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { ApprovalBars } from "@/components/Bars";
 import { Button, TextLink } from "@/components/Button";
 import { Closing } from "@/components/Closing";
@@ -8,6 +9,7 @@ import { Sequence } from "@/components/Sequence";
 import {
   closing,
   cycle,
+  faq,
   hero,
   model,
   product,
@@ -16,17 +18,11 @@ import {
   whyItMatters,
 } from "@/content/inicio";
 import { approvals } from "@/content/resultados";
+import { pageMetadata } from "@/lib/seo";
+import { homeGraph } from "@/lib/structured-data";
 import { FORM_URL, PILOT_CTA, ROUTES } from "@/content/site";
 
-const description =
-  "Educai convierte las conversaciones de estudio en información útil para que el docente decida mejor sus clases.";
-
-export const metadata: Metadata = {
-  title: "Educai: tutor de IA para el aula",
-  description,
-  alternates: { canonical: ROUTES.inicio },
-  openGraph: { title: "Educai: tutor de IA para el aula", description, url: ROUTES.inicio },
-};
+export const metadata: Metadata = pageMetadata("inicio", ROUTES.inicio);
 
 export default function InicioPage() {
   const [before, after] = approvals.bars;
@@ -34,6 +30,7 @@ export default function InicioPage() {
 
   return (
     <>
+      <JsonLd data={homeGraph()} />
       {/* Apertura: la pregunta y el producto que la responde */}
       <Section opening>
         <div className="grid opening">
@@ -184,6 +181,23 @@ export default function InicioPage() {
               <TextLink href={ROUTES.quienSoy}>{whyItMatters.link}</TextLink>
             </p>
           </div>
+        </div>
+      </Section>
+
+      {/* Preguntas frecuentes */}
+      <Section labelledBy="faq-title">
+        <div className="grid rule">
+          <h2 id="faq-title" className="h2 d-4">
+            {faq.title}
+          </h2>
+          <dl className="d-from-6 faq">
+            {faq.items.map((item) => (
+              <div key={item.question} className="faq__item">
+                <dt className="h4">{item.question}</dt>
+                <dd className="secondary">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </Section>
 

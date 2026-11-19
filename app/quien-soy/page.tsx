@@ -1,30 +1,20 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { Button, TextLink } from "@/components/Button";
 import { Closing } from "@/components/Closing";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import { Section, SectionHead } from "@/components/Section";
 import { contact, hero, perspective, projects, talks } from "@/content/quien-soy";
-import { EMAIL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
+import { aboutGraph } from "@/lib/structured-data";
+import { EMAIL, PERSONAL_SITE_URL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
 
-const title = "Tomás Fossatti";
-const description =
-  "Fundador de Educai. Hijo y nieto de docentes, emprendedor y estudiante en Córdoba, Argentina.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: ROUTES.quienSoy },
-  openGraph: {
-    title,
-    description,
-    url: ROUTES.quienSoy,
-    type: "profile",
-  },
-};
+export const metadata: Metadata = pageMetadata("quienSoy", ROUTES.quienSoy);
 
 export default function QuienSoyPage() {
   return (
     <>
+      <JsonLd data={aboutGraph()} />
       {/* Apertura */}
       <Section opening>
         <div className="grid opening">
@@ -32,9 +22,12 @@ export default function QuienSoyPage() {
             <h1 className="display">{hero.title}</h1>
             <p className="lede">{hero.subtitle}</p>
             <p className="secondary mt-8">{hero.facts.join(" · ")}</p>
+            <p className="mt-8">
+              <TextLink href={PERSONAL_SITE_URL}>{hero.personalSite}</TextLink>
+            </p>
           </div>
           <PhotoFrame
-            photo={PHOTOS.tedxEncendedorHero}
+            photo={PHOTOS.tedxEnEscena}
             ratio="portrait"
             preload
             sizes="(max-width: 1024px) 100vw, 400px"
@@ -65,8 +58,14 @@ export default function QuienSoyPage() {
           </SectionHead>
         </div>
         <ul className="grid">
-          {projects.items.map((project) => (
-            <li key={project.title} className="d-6 t-3 peer peer--rule">
+          {projects.items.map((project, index) => (
+            <li key={project.title} className="d-6 t-3 peer">
+              <PhotoFrame
+                photo={index === 0 ? PHOTOS.espacioIdiStand : PHOTOS.feria21Presentacion}
+                ratio="square"
+                caption={project.photoCaption}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 590px"
+              />
               <p className="label">{project.label}</p>
               <h3 className="h3">{project.title}</h3>
               <p className="secondary">{project.text}</p>
@@ -95,8 +94,8 @@ export default function QuienSoyPage() {
             </div>
           </div>
           <PhotoFrame
-            photo={PHOTOS.tedxEscenario}
-            ratio="portrait"
+            photo={PHOTOS.tedxCharla}
+            ratio="tall"
             sizes="(max-width: 1024px) 100vw, 400px"
             className="d-from-9 t-4"
           />
@@ -112,35 +111,52 @@ export default function QuienSoyPage() {
             photo={PHOTOS.feria21Stand}
             ratio="landscape"
             caption={talks.fairs.captions.stand}
-            sizes="(max-width: 1024px) 100vw, 790px"
-            className="d-8"
+            sizes="(max-width: 1024px) 100vw, 590px"
+            className="d-6 t-3"
           />
-          <div className="d-from-9 stack-loose">
-            <PhotoFrame
-              photo={PHOTOS.feria21Visitantes}
-              ratio="landscape"
-              caption={talks.fairs.captions.visitantes}
-              sizes="(max-width: 1024px) 100vw, 380px"
-            />
-            <PhotoFrame
-              photo={PHOTOS.meetTheMentors}
-              ratio="landscape"
-              caption={talks.fairs.captions.mentors}
-              sizes="(max-width: 1024px) 100vw, 380px"
-            />
-          </div>
+          <PhotoFrame
+            photo={PHOTOS.meetTheMentors}
+            ratio="landscape"
+            caption={talks.fairs.captions.mentors}
+            sizes="(max-width: 1024px) 100vw, 590px"
+            className="d-6 t-3"
+          />
         </div>
 
-        {/* Congreso y entrevista */}
-        <div className="grid mt-16">
-          <div className="d-6 t-3 peer peer--rule">
+        {/* Congreso Innova Educa 21 */}
+        <div className="grid mt-16 rule">
+          <div className="d-4 peer">
             <p className="label">{talks.congress.label}</p>
             <h3 className="h3">{talks.congress.title}</h3>
             <p>
               <TextLink href={ROUTES.resultados}>{talks.congress.link}</TextLink>
             </p>
           </div>
-          <div className="d-6 t-3 peer peer--rule">
+          <div className="d-12 photo-row">
+            <PhotoFrame
+              photo={PHOTOS.innovaEducaCartel}
+              ratio="tall"
+              caption={talks.congress.captions.cartel}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 250px"
+            />
+            <PhotoFrame
+              photo={PHOTOS.innovaEducaPoster}
+              ratio="tall"
+              caption={talks.congress.captions.poster}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 250px"
+            />
+            <PhotoFrame
+              photo={PHOTOS.tonucci}
+              ratio="tall"
+              caption={talks.congress.captions.tonucci}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 250px"
+            />
+          </div>
+        </div>
+
+        {/* Entrevista */}
+        <div className="grid mt-16">
+          <div className="d-8 peer peer--rule">
             <p className="label">{talks.interview.label}</p>
             <h3 className="h3">{talks.interview.title}</h3>
             <p className="secondary">{talks.interview.text}</p>

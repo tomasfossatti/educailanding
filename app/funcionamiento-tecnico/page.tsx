@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
 import { Button } from "@/components/Button";
 import { Closing } from "@/components/Closing";
 import { WithCodes } from "@/components/Codes";
 import { Section, SectionHead } from "@/components/Section";
 import { Sequence } from "@/components/Sequence";
+import { CONTENT_UPDATED, UPDATED_LABEL } from "@/content/seo";
+import { pageMetadata, updatedMonth } from "@/lib/seo";
+import { technicalGraph } from "@/lib/structured-data";
 import { FORM_URL, PILOT_CTA, ROUTES } from "@/content/site";
 import {
   closing,
@@ -17,28 +21,25 @@ import {
   validatedTutor,
 } from "@/content/tecnico";
 
-const title = "Funcionamiento técnico";
-const description =
-  "Cómo funciona Educai por dentro: tutor con contenido validado, patrones colectivos y privacidad desde la arquitectura.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: ROUTES.tecnico },
-  openGraph: { title, description, url: ROUTES.tecnico },
-};
+export const metadata: Metadata = pageMetadata("tecnico", ROUTES.tecnico);
 
 export default function TecnicoPage() {
   const [noData, insufficient, sufficient] = signals.states;
 
   return (
     <>
+      <JsonLd data={technicalGraph()} />
       {/* Apertura: qué es y el ciclo completo como mapa de la página */}
       <Section opening>
         <div className="grid">
           <div className="d-8 stack">
             <h1 className="title">{hero.title}</h1>
             <p className="lede">{hero.subtitle}</p>
+            <p className="meta">
+              <time dateTime={CONTENT_UPDATED}>
+                {UPDATED_LABEL} {updatedMonth()}
+              </time>
+            </p>
           </div>
           <div className="d-12 opening-meta">
             <p className="secondary">

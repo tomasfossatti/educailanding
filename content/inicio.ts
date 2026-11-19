@@ -148,6 +148,51 @@ export const resultsTeaser = {
   link: "Ver resultados completos",
 };
 
+/**
+ * Preguntas frecuentes. Las respuestas resumen lo que ya dice el sitio, para
+ * que buscadores y asistentes de IA encuentren respuestas cortas y directas.
+ */
+export const faq = {
+  title: "Preguntas frecuentes",
+  items: [
+    {
+      question: "¿Qué es Educai?",
+      answer:
+        "Educai es una plataforma con IA que convierte las conversaciones de estudio en información útil para que el docente decida mejor sus clases. El estudiante estudia con un tutor de IA que responde con los materiales de su docente, y el docente recibe patrones del grupo sobre los temas que generan dudas.",
+    },
+    {
+      question: "¿El docente puede ver lo que escribe cada estudiante?",
+      answer:
+        "No. El docente ve patrones del grupo, sin rankings ni diagnósticos de cada estudiante. El estudiante sube sus conversaciones por decisión propia, puede eliminarlas cuando quiera y el docente solo ve información anónima.",
+    },
+    {
+      question: "¿De dónde saca las respuestas el tutor de IA?",
+      answer:
+        "De los materiales activos que el docente cargó para la materia, en texto, Markdown o PDF. Educai registra qué fragmentos usó en cada respuesta.",
+    },
+    {
+      question: "¿Qué resultados tuvo el test con estudiantes?",
+      answer:
+        "Durante dos meses en una materia universitaria, 44 de 47 estudiantes aprobaron el 2.º parcial con Educai disponible, contra 33 de 47 en el 1.er parcial. Fue una observación sin grupo control, así que no atribuimos la mejora a Educai.",
+    },
+    {
+      question: "¿Cuánto cuesta Educai?",
+      answer:
+        "Estamos desarrollando un modelo en el que las instituciones educativas privadas pagan por cada estudiante activo que usa Educai, durante un período acordado, y los docentes participan de lo que Educai cobra. El reparto a docentes todavía no está implementado.",
+    },
+    {
+      question: "¿Cómo me sumo al piloto 2027?",
+      answer:
+        "Buscamos docentes e instituciones privadas para la cohorte 2027. Completá el formulario del piloto y te escribimos para empezar en una cátedra.",
+    },
+    {
+      question: "¿Quién está detrás de Educai?",
+      answer:
+        "Tomás Fossatti, estudiante, emprendedor e hijo y nieto de docentes, en Córdoba, Argentina. Presentó Educai en Feria21 Tech, en el congreso Innova Educa 21 y en una charla TEDx.",
+    },
+  ],
+};
+
 export const closing = {
   title: "Buscamos docentes e instituciones para el piloto 2027",
   text: "Queremos empezar en una cátedra, junto con sus docentes y estudiantes, y aprender de lo que ocurra en el aula. Si das clases en una institución privada y querés incorporar Educai en tu cátedra, completá el formulario y te escribimos.",

@@ -3,8 +3,11 @@ import type { Photo } from "@/content/site";
 
 type PhotoFrameProps = {
   photo: Photo;
-  /** "portrait" = 4:5 alineada arriba (TEDx). "landscape" = 3:2 (ferias y mentores). */
-  ratio: "portrait" | "landscape";
+  /**
+   * "portrait" = 4:5 alineada arriba (TEDx). "tall" = 3:4 alineada arriba (congresos).
+   * "landscape" = 3:2 (ferias y mentores). "square" = 1:1 (proyectos).
+   */
+  ratio: "portrait" | "tall" | "landscape" | "square";
   caption?: string;
   /** Sólo la foto del inicio de Quién soy se carga sin diferir. */
   preload?: boolean;
