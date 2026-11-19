@@ -1,48 +1,52 @@
 import type { ReactNode } from "react";
 
-type Tone = "bg" | "white" | "tint" | "ink" | "dark";
-
 type SectionProps = {
-  tone?: Tone;
-  /** Variante de padding para los héroes. */
-  variant?: "default" | "hero" | "hero-compact";
-  /** Separación vertical entre los bloques del contenedor. */
-  gap?: 24 | 32 | 36 | 40 | 48 | 56 | 64;
-  /** Si es "row", el contenedor es una fila flex que se reacomoda. */
-  layout?: "stack" | "row";
-  /** Alineación vertical de las columnas cuando layout es "row". */
-  align?: "center" | "start";
-  className?: string;
-  id?: string;
+  /** "contrast": franja invertida (una por página). "secondary": franja gris con borde. */
+  band?: "contrast" | "secondary";
+  /** Primera sección de la página, con menos aire arriba. */
+  opening?: boolean;
   labelledBy?: string;
+  className?: string;
   children: ReactNode;
 };
 
-export function Section({
-  tone = "bg",
-  variant = "default",
-  gap = 40,
-  layout = "stack",
-  align,
-  className = "",
-  id,
-  labelledBy,
-  children,
-}: SectionProps) {
-  const isDark = tone === "ink" || tone === "dark";
+export function Section({ band, opening = false, labelledBy, className = "", children }: SectionProps) {
   const classes = [
     "section",
-    tone !== "bg" ? `section--${tone}` : "",
-    variant !== "default" ? `section--${variant}` : "",
-    isDark ? "on-dark" : "",
+    band ? `band band--${band}` : "",
+    opening ? "section--opening" : "",
     className,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <section id={id} className={classes} aria-labelledby={labelledBy}>
-      <div className={`container ${layout} gap-${gap}${align ? ` items-${align}` : ""}`}>{children}</div>
+    <section className={classes} aria-labelledby={labelledBy}>
+      <div className="container">{children}</div>
     </section>
+  );
+}
+
+/** Título de sección con bajada opcional, en 8 columnas de escritorio. */
+export function SectionHead({
+  id,
+  title,
+  children,
+  wide = false,
+}: {
+  id: string;
+  title: ReactNode;
+  children?: ReactNode;
+  wide?: boolean;
+}) {
+  return (
+    <div className="grid section-head">
+      <div className={`${wide ? "d-9" : "d-8"} stack`}>
+        <h2 id={id} className="h2">
+          {title}
+        </h2>
+        {children}
+      </div>
+    </div>
   );
 }

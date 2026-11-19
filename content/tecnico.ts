@@ -1,13 +1,12 @@
 export const hero = {
-  eyebrow: "Funcionamiento técnico",
   title: "Cómo funciona Educai por dentro",
   subtitle:
     "Educai ya funciona como un MVP desplegado en producción, con flujo de estudiante, flujo de docente y lógica analítica. Convierte conversaciones individuales en patrones colectivos sin construir perfiles de cada alumno.",
+  stackLabel: "Construido con",
   stack: ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Render"],
 };
 
 export const fullCycle = {
-  eyebrow: "El ciclo completo",
   title: "Del contenido del docente a una nueva decisión docente",
   steps: [
     { title: "Contenido docente", text: "El docente carga y activa los materiales de su materia." },
@@ -32,7 +31,6 @@ export const fullCycle = {
 };
 
 export const validatedTutor = {
-  eyebrow: "Tutor con contenido validado",
   title: "El docente controla de dónde responde la IA",
   paragraphs: [
     "El docente carga materiales en texto, Markdown o PDF, y cada uno tiene un estado: borrador (DRAFT), activo (ACTIVE) o retirado (RETIRED). Solo los materiales activos se usan para recuperar contexto durante las conversaciones.",
@@ -50,8 +48,10 @@ export const validatedTutor = {
 };
 
 export const signals = {
-  eyebrow: "Del chat al patrón colectivo",
   title: "Educai busca señales y agrega evidencia por participante",
+  scaleLabel: "Participantes independientes con señales sobre un concepto",
+  scaleEnd: "Más participantes",
+  thresholdLabel: "Umbral: 3 participantes, configurable",
   paragraphs: [
     "Además de guardar la conversación que necesita el estudiante, Educai la analiza y detecta preguntas, confusiones, reformulaciones, conceptos involucrados, tipos de explicación y señales de comprensión. La IA devuelve el análisis bajo un esquema estructurado que se valida antes de guardarlo, y esas señales son observaciones sobre la conversación, sin convertirse en una nota.",
     "Para que una conversación intensa de una sola persona no distorsione el resultado, la agregación cuenta participantes independientes y deja de lado la cantidad de mensajes.",
@@ -74,7 +74,6 @@ export const signals = {
 };
 
 export const insights = {
-  eyebrow: "Insights y seguimiento",
   title: "De la evidencia a la acción en clase",
   items: [
     {
@@ -98,7 +97,6 @@ export const insights = {
 };
 
 export const privacy = {
-  eyebrow: "Privacidad desde la arquitectura",
   title: "Identidad, análisis y agregación van por separado",
   text: "La conversación pertenece a la experiencia privada del estudiante. Las señales se transforman antes de llegar al docente, que trabaja sobre el insight del grupo y no sobre un expediente individual.",
   flowLabel: "Recorrido de los datos",
@@ -128,7 +126,7 @@ export const privacy = {
 };
 
 export const roadmap = {
-  eyebrow: "Hacia dónde va · especificado, todavía no construido",
+  status: "Especificado, todavía no construido",
   title: "De la evidencia a la próxima decisión",
   intro:
     "Además del MVP, tenemos escritas las especificaciones (versión 1.0) de la capa que sigue. Las incluimos acá porque muestran cómo pensamos el producto, pero no las contamos como funcionalidades existentes.",
@@ -168,7 +166,6 @@ export const roadmap = {
 };
 
 export const mvpStatus = {
-  eyebrow: "Estado actual del MVP",
   title: "Lo que ya funciona y lo que todavía falta",
   done: {
     title: "Ya funciona",

@@ -4,6 +4,8 @@ export const EMAIL = "tomas.fossatti01@gmail.com";
 export const YOUTUBE_TEDX_URL = "https://www.youtube.com/watch?v=n1LSi7t5WKs";
 
 export const PILOT_CTA = "Sumate al piloto 2027";
+export const NAV_CTA = "Sumarme al piloto 2027";
+export const FOOTER_TEXT = "Fundado por Tomás Fossatti en Córdoba, Argentina";
 
 export const ROUTES = {
   inicio: "/",
@@ -45,12 +47,6 @@ export const PHOTOS = {
     width: 480,
     height: 853,
     alt: "Tomás Fossatti durante su charla TEDx",
-  },
-  tedxEncendedor: {
-    src: "/photos/tedx-encendedor.jpg",
-    width: 480,
-    height: 853,
-    alt: "Expositor durante la charla TEDx, con un encendedor en la mano",
   },
   tedxEscenario: {
     src: "/photos/tedx-escenario.jpg",

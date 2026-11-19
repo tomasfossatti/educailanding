@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 
 type ButtonProps = {
   href: string;
-  variant?: "primary" | "ghost" | "light";
-  className?: string;
+  variant?: "primary" | "secondary";
+  size?: "default" | "large";
   children: ReactNode;
 };
 
@@ -12,8 +12,14 @@ function isExternal(href: string) {
   return /^https?:\/\//.test(href);
 }
 
-export function Button({ href, variant = "primary", className = "", children }: ButtonProps) {
-  const classes = `btn btn--${variant} ${className}`.trim();
+export function Button({ href, variant = "primary", size = "default", children }: ButtonProps) {
+  const classes = [
+    "button",
+    variant === "secondary" ? "button--secondary" : "",
+    size === "large" ? "button--large" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   if (href.startsWith("mailto:")) {
     return (

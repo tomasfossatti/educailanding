@@ -1,13 +1,16 @@
 export const intro = {
-  eyebrow: "Resultados del test",
   title:
     "Qué pasó durante dos meses en una materia universitaria y en una escuela de robótica",
   subtitle:
     "Aplicamos el ciclo completo de Educai durante dos meses y presentamos los resultados en el congreso Innova Educa 21.",
   context: [
-    { value: "2 meses", label: "de ciclo aplicado en clase." },
-    { value: "47", label: "estudiantes en una materia universitaria." },
-    { value: "20", label: "estudiantes de 12 a 18 años en una escuela de robótica." },
+    { label: "Duración", value: "2 meses", detail: "de ciclo aplicado en clase." },
+    { label: "Universidad", value: "47", detail: "estudiantes en una materia universitaria." },
+    {
+      label: "Escuela de robótica",
+      value: "20",
+      detail: "estudiantes de 12 a 18 años.",
+    },
   ],
 };
 
@@ -15,40 +18,64 @@ export const intro = {
 export const approvals = {
   title: "Aprobados por parcial",
   total: 47,
+  unit: "estudiantes",
   bars: [
     {
-      label: "1.er parcial, antes de Educai (33 de 47)",
+      label: "1.er parcial, antes de Educai",
       approved: 33,
       percent: 70,
-      tone: "muted" as const,
+      emphasis: false,
     },
     {
-      label: "2.º parcial, con Educai disponible (44 de 47)",
+      label: "2.º parcial, con Educai disponible",
       approved: 44,
       percent: 94,
-      tone: "highlight" as const,
+      emphasis: true,
     },
   ],
+  /** Se muestra como «+11 aprobados más», calculado a partir de las barras. */
+  deltaSuffix: "aprobados más que en el 1.er parcial",
   reading: "La aprobación fue mayor y coincide con Educai, sin atribución causal.",
 };
 
 export const adoption = {
   title: "Adopción de Educai",
-  rows: [
-    { label: "Universidad: lo usaron", value: 29, total: 47 },
-    { label: "Universidad: completaron el ciclo", value: 25, total: 47 },
-    { label: "Robótica: lo usaron", value: 20, total: 20 },
-    { label: "Robótica: completaron el ciclo", value: 20, total: 20 },
+  scaleLabel: "Porcentaje sobre los inscriptos de cada grupo",
+  groups: [
+    {
+      name: "Universidad",
+      total: 47,
+      rows: [
+        { label: "Lo usaron", value: 29 },
+        { label: "Completaron el ciclo", value: 25 },
+      ],
+    },
+    {
+      name: "Escuela de robótica",
+      total: 20,
+      rows: [
+        { label: "Lo usaron", value: 20 },
+        { label: "Completaron el ciclo", value: 20 },
+      ],
+    },
   ],
   reading:
     "29 de 47 estudiantes (62 %) usaron Educai con asistencia estable, lo que sugiere uso fuera del aula.",
-  stats: [
-    { value: "25 de 29", label: "de los que empezaron el ciclo lo terminaron." },
-    {
-      value: "1–2 a 3–4",
-      label:
-        "fue la valoración promedio de la clase entre el inicio y el final del período, en una escala de 1 a 4.",
-    },
+  completion: {
+    label: "Terminaron el ciclo",
+    value: "25 de 29",
+    detail: "de los que lo empezaron en la universidad.",
+  },
+};
+
+/** Valoración promedio de la clase, en una escala de 1 a 4. */
+export const rating = {
+  title: "Valoración de la clase",
+  text: "Promedio entre el inicio y el final del período, en una escala de 1 a 4.",
+  scale: [1, 2, 3, 4],
+  periods: [
+    { label: "Inicio del período", from: 1, to: 2, emphasis: false },
+    { label: "Final del período", from: 3, to: 4, emphasis: true },
   ],
 };
 
@@ -73,13 +100,11 @@ export const observations = {
 };
 
 export const limits = {
-  eyebrow: "Límites del test",
   title: "Lo que todavía no podemos afirmar",
   text: "El diseño fue observacional y no tuvo grupo control. El anonimato impide vincular el uso con el desempeño de cada estudiante, no se controló la dificultad de los parciales y no conocemos las razones por las que 18 estudiantes no lo usaron.",
 };
 
 export const nextSteps = {
-  eyebrow: "Próximos pasos",
   title: "Qué vamos a medir en 2027",
   text: "Vamos a sumar un grupo control, a estudiar por qué 18 estudiantes no lo usaron y a medir el impacto en el aprendizaje.",
 };

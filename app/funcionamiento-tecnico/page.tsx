@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
-import { Chip, ChipList } from "@/components/Chip";
-import { CtaBand } from "@/components/CtaBand";
-import { Eyebrow } from "@/components/Eyebrow";
-import { Section } from "@/components/Section";
-import { SectionHeading } from "@/components/SectionHeading";
-import { CompactStepList, StepList } from "@/components/StepList";
+import { Closing } from "@/components/Closing";
+import { WithCodes } from "@/components/Codes";
+import { Section, SectionHead } from "@/components/Section";
+import { Sequence } from "@/components/Sequence";
 import { FORM_URL, PILOT_CTA, ROUTES } from "@/content/site";
 import {
   closing,
@@ -32,99 +29,136 @@ export const metadata: Metadata = {
 };
 
 export default function TecnicoPage() {
+  const [noData, insufficient, sufficient] = signals.states;
+
   return (
     <>
-      {/* Hero */}
-      <Section variant="hero-compact" gap={24}>
-        <Eyebrow>{hero.eyebrow}</Eyebrow>
-        <h1 className="h1 h1--compact measure-820">{hero.title}</h1>
-        <p className="lead measure-780">{hero.subtitle}</p>
-        <ChipList items={hero.stack} size="sm" label="Tecnologías" />
-        <div className="row pt-8">
-          <Button href={FORM_URL}>{PILOT_CTA}</Button>
+      {/* Apertura: qué es y el ciclo completo como mapa de la página */}
+      <Section opening>
+        <div className="grid">
+          <div className="d-8 stack">
+            <h1 className="title">{hero.title}</h1>
+            <p className="lede">{hero.subtitle}</p>
+          </div>
+          <div className="d-12 opening-meta">
+            <p className="secondary">
+              <span className="label">{hero.stackLabel} </span>
+              {hero.stack.join(", ")}.
+            </p>
+            <Button href={FORM_URL}>{PILOT_CTA}</Button>
+          </div>
         </div>
-      </Section>
 
-      {/* El ciclo completo */}
-      <Section tone="white" labelledBy="cycle-title">
-        <SectionHeading eyebrow={fullCycle.eyebrow} title={fullCycle.title} id="cycle-title" size={38} />
-        <StepList steps={fullCycle.steps} variant="inline" />
+        <div className="mt-16">
+          <h2 id="cycle-title" className="h3 mb-8">
+            {fullCycle.title}
+          </h2>
+          <ol className="grid cycle-grid">
+            {fullCycle.steps.map((step, index) => (
+              <li key={step.title} className="d-4 t-3 peer peer--rule">
+                <span className="sequence__index" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <h3 className="h4">
+                  <span className="visually-hidden">Paso {index + 1}: </span>
+                  {step.title}
+                </h3>
+                <p className="secondary">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Section>
 
       {/* Tutor con contenido validado */}
-      <Section layout="row" gap={56} labelledBy="tutor-title">
-        <div className="stack gap-16 basis-420">
-          <Eyebrow>{validatedTutor.eyebrow}</Eyebrow>
-          <h2 id="tutor-title" className="h2 h2--34">
-            {validatedTutor.title}
-          </h2>
-          {validatedTutor.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="body">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-        <div className="stack gap-12 basis-420">
-          <p className="label">{validatedTutor.ragLabel}</p>
-          <CompactStepList steps={validatedTutor.rag} />
+      <Section labelledBy="tutor-title">
+        <div className="grid rule">
+          <div className="d-6 t-3">
+            <h2 id="tutor-title" className="h2">
+              {validatedTutor.title}
+            </h2>
+            <div className="prose mt-8">
+              {validatedTutor.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="secondary">
+                  <WithCodes text={paragraph} />
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="d-from-8 t-3">
+            <h3 className="label mb-8">{validatedTutor.ragLabel}</h3>
+            <ol className="list-numbered">
+              {validatedTutor.rag.map((step, index) => (
+                <li key={step}>
+                  <span className="sequence__index" aria-hidden="true">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </Section>
 
-      {/* Del chat al patrón colectivo */}
-      <Section tone="ink" labelledBy="signals-title">
-        <SectionHeading
-          eyebrow={signals.eyebrow}
-          title={signals.title}
-          id="signals-title"
-          size={38}
-          measure={820}
-        >
+      {/* Del chat al patrón colectivo: el umbral de evidencia */}
+      <Section band="secondary" labelledBy="signals-title">
+        <SectionHead id="signals-title" title={signals.title}>
           {signals.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="body">
+            <p key={paragraph} className="secondary prose">
               {paragraph}
             </p>
           ))}
-        </SectionHeading>
-        <ul className="row gap-24">
-          {signals.states.map((state) => (
-            <Card key={state.code} as="li" variant="dark" gap={10} basis={280}>
-              <h3 className="h3 h3--22 state-code">{state.code}</h3>
-              <p className="card-text">{state.text}</p>
-            </Card>
-          ))}
-        </ul>
-        <figure className="callout stack gap-10 measure-820">
+        </SectionHead>
+
+        <figure className="threshold-wrap" aria-label={signals.scaleLabel}>
+          <ul className="threshold">
+            {[noData, insufficient].map((state) => (
+              <li key={state.code} className="threshold__state">
+                <h3 className="h4">{state.code}</h3>
+                <p className="secondary">{state.text}</p>
+              </li>
+            ))}
+            <li className="threshold__state threshold__state--met">
+              <span className="threshold__marker label">{signals.thresholdLabel}</span>
+              <h3 className="h4">{sufficient.code}</h3>
+              <p className="secondary">{sufficient.text}</p>
+            </li>
+          </ul>
+          <figcaption className="threshold__axis meta">
+            <span>{signals.scaleLabel}</span>
+            <span aria-hidden="true">{signals.scaleEnd} →</span>
+          </figcaption>
+        </figure>
+
+        <figure className="example mt-16">
           <figcaption className="label">{signals.exampleLabel}</figcaption>
-          <blockquote className="example-quote">{signals.example}</blockquote>
-          <p className="small-text">{signals.exampleNote}</p>
+          <blockquote>{signals.example}</blockquote>
+          <p className="meta">{signals.exampleNote}</p>
         </figure>
       </Section>
 
       {/* Insights y seguimiento */}
       <Section labelledBy="insights-title">
-        <SectionHeading eyebrow={insights.eyebrow} title={insights.title} id="insights-title" size={38} measure={820} />
-        <ul className="row gap-24">
-          {insights.items.map((item) => (
-            <Card key={item.title} as="li" variant="surface" gap={10} basis={280}>
-              <h3 className="h3">{item.title}</h3>
-              <p className="card-text">{item.text}</p>
-            </Card>
-          ))}
-        </ul>
-        <p className="body measure-820">{insights.note}</p>
+        <SectionHead id="insights-title" title={insights.title} />
+        <Sequence steps={insights.items} label={insights.title} />
+        <p className="caption mt-10">{insights.note}</p>
       </Section>
 
       {/* Privacidad desde la arquitectura */}
-      <Section tone="tint" labelledBy="privacy-title">
-        <SectionHeading eyebrow={privacy.eyebrow} title={privacy.title} id="privacy-title" size={38} measure={820}>
-          <p className="body">{privacy.text}</p>
-        </SectionHeading>
+      <Section labelledBy="privacy-title">
+        <div className="rule">
+          <SectionHead id="privacy-title" title={privacy.title}>
+            <p className="secondary prose">{privacy.text}</p>
+          </SectionHead>
+        </div>
+        <h3 className="label mb-8">{privacy.flowLabel}</h3>
         <ol className="flow" aria-label={privacy.flowLabel}>
           {privacy.flow.map((step, index) => {
             const isLast = index === privacy.flow.length - 1;
             return (
               <li key={step}>
-                <Chip variant={isLast ? "accent" : "surface"}>{step}</Chip>
+                <span className={`flow__node${isLast ? " flow__node--end" : ""}`}>{step}</span>
                 {isLast ? null : (
                   <span className="flow__arrow" aria-hidden="true">
                     →
@@ -134,61 +168,70 @@ export default function TecnicoPage() {
             );
           })}
         </ol>
-        <ul className="row gap-24">
+        <ul className="grid mt-16">
           {privacy.items.map((item) => (
-            <Card key={item.title} as="li" variant="white" gap={10} basis={280}>
-              <h3 className="h3">{item.title}</h3>
-              <p className="card-text">{item.text}</p>
-            </Card>
+            <li key={item.title} className="d-4 t-2 peer peer--rule">
+              <h3 className="h4">{item.title}</h3>
+              <p className="secondary">{item.text}</p>
+            </li>
           ))}
         </ul>
       </Section>
 
       {/* Hacia dónde va: especificado, todavía no construido */}
-      <Section tone="dark" labelledBy="roadmap-title">
-        <SectionHeading eyebrow={roadmap.eyebrow} title={roadmap.title} id="roadmap-title" size={38} measure={820}>
-          <p className="body">{roadmap.intro}</p>
-        </SectionHeading>
-        <ul className="row gap-24">
+      <Section band="secondary" labelledBy="roadmap-title">
+        <div className="grid section-head">
+          <div className="d-8 stack">
+            <p className="status">{roadmap.status}</p>
+            <h2 id="roadmap-title" className="h2">
+              {roadmap.title}
+            </h2>
+            <p className="secondary prose">{roadmap.intro}</p>
+          </div>
+        </div>
+        <ul className="grid">
           {roadmap.engines.map((engine) => (
-            <Card key={engine.title} as="li" variant="dark-raised" gap={12} basis={300}>
-              <h3 className="h3">{engine.title}</h3>
+            <li key={engine.title} className="d-4 peer peer--rule">
+              <h3 className="h4">{engine.title}</h3>
               {engine.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="card-text">
+                <p key={paragraph} className="secondary">
                   {paragraph}
                 </p>
               ))}
-            </Card>
+            </li>
           ))}
         </ul>
-        <ul className="row gap-24">
+        <ul className="grid mt-16">
           {roadmap.proposals.map((proposal) => (
-            <Card key={proposal.title} as="li" variant="dark-outline-strong" gap={10} basis={420}>
-              <h3 className="h3">{proposal.title}</h3>
-              <p className="card-text">{proposal.text}</p>
-            </Card>
+            <li key={proposal.title} className="d-6 t-3 peer peer--rule">
+              <h3 className="h4">{proposal.title}</h3>
+              <p className="secondary">{proposal.text}</p>
+            </li>
           ))}
         </ul>
       </Section>
 
       {/* Estado actual del MVP */}
       <Section labelledBy="mvp-title">
-        <SectionHeading eyebrow={mvpStatus.eyebrow} title={mvpStatus.title} id="mvp-title" size={38} measure={820} />
-        <div className="row gap-48">
-          {[
-            { ...mvpStatus.done, variant: "fill" as const },
-            { ...mvpStatus.pending, variant: "outline" as const },
-          ].map((group) => (
-            <div key={group.title} className="stack gap-16 basis-420">
-              <h3 className="h3 h3--24">{group.title}</h3>
-              <ChipList items={group.items} variant={group.variant} />
+        <SectionHead id="mvp-title" title={mvpStatus.title} />
+        <div className="grid">
+          {[mvpStatus.done, mvpStatus.pending].map((group, groupIndex) => (
+            <div key={group.title} className={groupIndex === 0 ? "d-6 t-3" : "d-from-7 t-3"}>
+              <h3 className="h3">
+                {group.title} <span className="count">{group.items.length}</span>
+              </h3>
+              <ul className={`list-ruled mt-8${groupIndex === 0 ? "" : " secondary"}`}>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
-        <p className="note note--15 measure-820">{mvpStatus.note}</p>
+        <p className="caption mt-10">{mvpStatus.note}</p>
       </Section>
 
-      <CtaBand title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
+      <Closing id="closing-title" title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
     </>
   );
 }

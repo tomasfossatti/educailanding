@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Button, TextLink } from "@/components/Button";
-import { Card } from "@/components/Card";
-import { ChipList } from "@/components/Chip";
-import { CtaBand } from "@/components/CtaBand";
-import { Eyebrow } from "@/components/Eyebrow";
+import { Closing } from "@/components/Closing";
 import { PhotoFrame } from "@/components/PhotoFrame";
-import { Section } from "@/components/Section";
-import { SectionHeading } from "@/components/SectionHeading";
+import { Section, SectionHead } from "@/components/Section";
 import { contact, hero, perspective, projects, talks } from "@/content/quien-soy";
 import { EMAIL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
 
@@ -29,140 +25,135 @@ export const metadata: Metadata = {
 export default function QuienSoyPage() {
   return (
     <>
-      {/* Hero */}
-      <Section variant="hero" layout="row" gap={56} align="center">
-        <div className="stack gap-24 basis-480">
-          <Eyebrow>{hero.eyebrow}</Eyebrow>
-          <h1 className="h1">{hero.title}</h1>
-          <p className="lead measure-560">{hero.subtitle}</p>
-          <ChipList items={hero.chips} size="sm" />
+      {/* Apertura */}
+      <Section opening>
+        <div className="grid opening">
+          <div className="d-7">
+            <h1 className="display">{hero.title}</h1>
+            <p className="lede">{hero.subtitle}</p>
+            <p className="secondary mt-8">{hero.facts.join(" · ")}</p>
+          </div>
+          <PhotoFrame
+            photo={PHOTOS.tedxEncendedorHero}
+            ratio="portrait"
+            preload
+            sizes="(max-width: 1024px) 100vw, 400px"
+            className="d-from-9 t-4"
+          />
         </div>
-        <PhotoFrame
-          photo={PHOTOS.tedxEncendedorHero}
-          ratio="portrait"
-          hero
-          preload
-          sizes="(max-width: 480px) 100vw, 380px"
-          className="hero-photo"
-        />
       </Section>
 
       {/* Perspectiva */}
-      <Section tone="ink" layout="row" gap={64} labelledBy="perspective-title">
-        <div className="stack gap-16 basis-380">
-          <Eyebrow>{perspective.eyebrow}</Eyebrow>
-          <h2 id="perspective-title" className="h2 h2--40">
+      <Section labelledBy="perspective-title">
+        <div className="grid rule">
+          <h2 id="perspective-title" className="h2 d-5">
             {perspective.title}
           </h2>
-        </div>
-        <div className="stack gap-22 basis-480 body-lg">
-          {perspective.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <div className="d-from-7 prose prose--lede">
+            {perspective.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </div>
       </Section>
 
       {/* Proyectos */}
       <Section labelledBy="projects-title">
-        <SectionHeading eyebrow={projects.eyebrow} title={projects.title} id="projects-title" size={38}>
-          <p className="body-lg">{projects.intro}</p>
-        </SectionHeading>
-        <ul className="row gap-24">
+        <div className="rule">
+          <SectionHead id="projects-title" title={projects.title}>
+            <p className="secondary prose">{projects.intro}</p>
+          </SectionHead>
+        </div>
+        <ul className="grid">
           {projects.items.map((project) => (
-            <Card key={project.title} as="li" variant="surface" padding="p32" gap={12} basis={420}>
-              <p className="eyebrow">{project.label}</p>
-              <h3 className="h3 h3--28">{project.title}</h3>
-              <p className="card-text">{project.text}</p>
-              {project.link ? <TextLink href={ROUTES.inicio}>{project.link}</TextLink> : null}
-            </Card>
+            <li key={project.title} className="d-6 t-3 peer peer--rule">
+              <p className="label">{project.label}</p>
+              <h3 className="h3">{project.title}</h3>
+              <p className="secondary">{project.text}</p>
+              {project.link ? (
+                <p>
+                  <TextLink href={ROUTES.inicio}>{project.link}</TextLink>
+                </p>
+              ) : null}
+            </li>
           ))}
         </ul>
       </Section>
 
       {/* Exposiciones */}
-      <Section tone="white" gap={56} labelledBy="talks-title">
-        <SectionHeading eyebrow={talks.eyebrow} title={talks.title} id="talks-title" size={38} />
+      <Section band="secondary" labelledBy="talks-title">
+        <SectionHead id="talks-title" title={talks.title} />
 
         {/* TEDx */}
-        <div className="row items-center gap-48">
-          <div className="stack gap-18 basis-420">
-            <p className="eyebrow">{talks.tedx.label}</p>
-            <h3 className="h3 h3--32">{talks.tedx.title}</h3>
-            <p className="body">{talks.tedx.text}</p>
-            <div className="row">
+        <div className="grid opening">
+          <div className="d-5 peer">
+            <p className="label">{talks.tedx.label}</p>
+            <h3 className="h3">{talks.tedx.title}</h3>
+            <p className="secondary">{talks.tedx.text}</p>
+            <div className="actions mt-8">
               <Button href={YOUTUBE_TEDX_URL}>{talks.tedx.cta}</Button>
             </div>
           </div>
-          <div className="row gap-20 basis-420">
-            <PhotoFrame
-              photo={PHOTOS.tedxEncendedor}
-              ratio="portrait"
-              sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 300px"
-              className="basis-180"
-            />
-            <PhotoFrame
-              photo={PHOTOS.tedxEscenario}
-              ratio="portrait"
-              sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 300px"
-              className="basis-180"
-            />
-          </div>
+          <PhotoFrame
+            photo={PHOTOS.tedxEscenario}
+            ratio="portrait"
+            sizes="(max-width: 1024px) 100vw, 400px"
+            className="d-from-9 t-4"
+          />
         </div>
 
         {/* Ferias, congresos y sesiones con mentores */}
-        <div className="stack gap-28">
-          <div className="stack gap-12 measure-760">
-            <h3 className="h3 h3--30">{talks.fairs.title}</h3>
-            <p className="body">{talks.fairs.text}</p>
+        <div className="grid mt-16 rule">
+          <div className="d-8 peer">
+            <h3 className="h3">{talks.fairs.title}</h3>
+            <p className="secondary">{talks.fairs.text}</p>
           </div>
-          <div className="row items-start gap-24">
+          <PhotoFrame
+            photo={PHOTOS.feria21Stand}
+            ratio="landscape"
+            caption={talks.fairs.captions.stand}
+            sizes="(max-width: 1024px) 100vw, 790px"
+            className="d-8"
+          />
+          <div className="d-from-9 stack-loose">
             <PhotoFrame
-              photo={PHOTOS.feria21Stand}
+              photo={PHOTOS.feria21Visitantes}
               ratio="landscape"
-              caption={talks.fairs.captions.stand}
-              sizes="(max-width: 900px) 100vw, 720px"
-              className="basis-520"
+              caption={talks.fairs.captions.visitantes}
+              sizes="(max-width: 1024px) 100vw, 380px"
             />
-            <div className="stack gap-24 basis-320">
-              <PhotoFrame
-                photo={PHOTOS.feria21Visitantes}
-                ratio="landscape"
-                caption={talks.fairs.captions.visitantes}
-                sizes="(max-width: 900px) 100vw, 480px"
-              />
-              <PhotoFrame
-                photo={PHOTOS.meetTheMentors}
-                ratio="landscape"
-                caption={talks.fairs.captions.mentors}
-                sizes="(max-width: 900px) 100vw, 480px"
-              />
-            </div>
+            <PhotoFrame
+              photo={PHOTOS.meetTheMentors}
+              ratio="landscape"
+              caption={talks.fairs.captions.mentors}
+              sizes="(max-width: 1024px) 100vw, 380px"
+            />
           </div>
         </div>
 
         {/* Congreso y entrevista */}
-        <div className="row gap-24">
-          <Card variant="tint" gap={10} basis={420}>
-            <p className="eyebrow">{talks.congress.label}</p>
-            <h3 className="h3 h3--22">{talks.congress.title}</h3>
-            <TextLink href={ROUTES.resultados}>{talks.congress.link}</TextLink>
-          </Card>
-          <Card variant="tint" gap={10} basis={420}>
-            <p className="eyebrow">{talks.interview.label}</p>
-            <h3 className="h3 h3--22">{talks.interview.title}</h3>
-            <p className="small-text">{talks.interview.text}</p>
-          </Card>
+        <div className="grid mt-16">
+          <div className="d-6 t-3 peer peer--rule">
+            <p className="label">{talks.congress.label}</p>
+            <h3 className="h3">{talks.congress.title}</h3>
+            <p>
+              <TextLink href={ROUTES.resultados}>{talks.congress.link}</TextLink>
+            </p>
+          </div>
+          <div className="d-6 t-3 peer peer--rule">
+            <p className="label">{talks.interview.label}</p>
+            <h3 className="h3">{talks.interview.title}</h3>
+            <p className="secondary">{talks.interview.text}</p>
+          </div>
         </div>
       </Section>
 
-      <CtaBand
-        tall
-        eyebrow={contact.eyebrow}
+      <Closing
+        id="contact-title"
         title={contact.title}
         text={contact.text}
         href={`mailto:${EMAIL}`}
         cta={contact.cta}
-        titleSize={40}
       />
     </>
   );

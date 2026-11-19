@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { ColumnChart, HorizontalBarChart } from "@/components/BarChart";
-import { Card } from "@/components/Card";
-import { CtaBand } from "@/components/CtaBand";
-import { Eyebrow } from "@/components/Eyebrow";
-import { Section } from "@/components/Section";
-import { Stat } from "@/components/Stat";
+import { AdoptionBars, ApprovalBars, RatingRange } from "@/components/Bars";
+import { Closing } from "@/components/Closing";
+import { Section, SectionHead } from "@/components/Section";
 import {
   adoption,
   approvals,
@@ -13,6 +10,7 @@ import {
   limits,
   nextSteps,
   observations,
+  rating,
 } from "@/content/resultados";
 import { FORM_URL, PILOT_CTA, ROUTES } from "@/content/site";
 
@@ -28,71 +26,110 @@ export const metadata: Metadata = {
 };
 
 export default function ResultadosPage() {
+  const [before, after] = approvals.bars;
+
   return (
     <>
-      {/* Introducción */}
-      <Section variant="hero-compact" gap={32}>
-        <div className="stack gap-20 measure-820">
-          <Eyebrow>{intro.eyebrow}</Eyebrow>
-          <h1 className="h1 h1--compact">{intro.title}</h1>
-          <p className="lead">{intro.subtitle}</p>
+      {/* Apertura: la pregunta y la evidencia principal en la misma vista */}
+      <Section opening>
+        <div className="grid">
+          <div className="d-9 stack">
+            <h1 className="title">{intro.title}</h1>
+            <p className="lede">{intro.subtitle}</p>
+          </div>
         </div>
-        <div className="row gap-24">
+
+        <figure className="grid figure mt-16" aria-labelledby="approvals-title">
+          <div className="d-4 t-2">
+            <h2 id="approvals-title" className="h3">
+              {approvals.title}
+            </h2>
+            <div className="delta mt-8">
+              <span className="delta__value">+{after.approved - before.approved}</span>
+              <span className="secondary">{approvals.deltaSuffix}</span>
+            </div>
+          </div>
+          <div className="d-from-6 t-4">
+            <ApprovalBars bars={approvals.bars} total={approvals.total} unit={approvals.unit} />
+            <figcaption className="caption mt-8">{approvals.reading}</figcaption>
+          </div>
+        </figure>
+
+        <dl className="grid mt-16">
           {intro.context.map((item) => (
-            <Stat key={item.value} value={item.value} label={item.label} size={36} basis={240} />
+            <div key={item.label} className="d-4 t-2 peer--rule">
+              <dt className="label">{item.label}</dt>
+              <dd>
+                <span className="stat__value">{item.value}</span>
+                <span className="stat__detail">{item.detail}</span>
+              </dd>
+            </div>
           ))}
+        </dl>
+      </Section>
+
+      {/* Adopción y valoración */}
+      <Section band="secondary" labelledBy="adoption-title">
+        <div className="grid">
+          <figure className="d-7 figure" aria-labelledby="adoption-title">
+            <h2 id="adoption-title" className="h2">
+              {adoption.title}
+            </h2>
+            <p className="secondary mt-8 mb-8">
+              {adoption.scaleLabel}
+            </p>
+            <AdoptionBars groups={adoption.groups} />
+            <figcaption className="caption">{adoption.reading}</figcaption>
+          </figure>
+
+          <div className="d-from-9 stack-loose">
+            <div className="peer--rule">
+              <p className="label">{adoption.completion.label}</p>
+              <span className="stat__value">{adoption.completion.value}</span>
+              <p className="stat__detail">{adoption.completion.detail}</p>
+            </div>
+            <figure className="peer--rule" aria-labelledby="rating-title">
+              <h3 id="rating-title" className="label">
+                {rating.title}
+              </h3>
+              <p className="stat__detail mt-8 mb-8">{rating.text}</p>
+              <RatingRange scale={rating.scale} periods={rating.periods} stacked />
+            </figure>
+          </div>
         </div>
       </Section>
 
-      {/* Datos */}
-      <Section tone="ink" labelledBy="observations-title">
-        <div className="row gap-24">
-          <Card variant="dark" gap={20} basis={380}>
-            <h2 className="h2 h2--22">{approvals.title}</h2>
-            <ColumnChart bars={approvals.bars} />
-            <p className="note">{approvals.reading}</p>
-          </Card>
-          <Card variant="dark" gap={20} basis={380}>
-            <h2 className="h2 h2--22">{adoption.title}</h2>
-            <HorizontalBarChart rows={adoption.rows} />
-            <p className="note">{adoption.reading}</p>
-          </Card>
-        </div>
-
-        <div className="row gap-24">
-          {adoption.stats.map((stat) => (
-            <Stat key={stat.value} value={stat.value} label={stat.label} variant="dark" size={44} />
+      {/* Lo que observamos en clase */}
+      <Section labelledBy="observations-title">
+        <SectionHead id="observations-title" title={observations.title} />
+        <ul className="grid">
+          {observations.items.map((item) => (
+            <li key={item.title} className="d-4 t-2 peer peer--rule">
+              <h3 className="h4">{item.title}</h3>
+              <p className="secondary">{item.text}</p>
+            </li>
           ))}
-        </div>
-
-        <div className="stack gap-20">
-          <h2 id="observations-title" className="h2 h2--28">
-            {observations.title}
-          </h2>
-          <ol className="row gap-24">
-            {observations.items.map((item) => (
-              <Card key={item.title} as="li" variant="dark-outline" padding="p24" gap={8} basis={260}>
-                <h3 className="h3 h3--20">{item.title}</h3>
-                <p className="small-text">{item.text}</p>
-              </Card>
-            ))}
-          </ol>
-          <p className="note--15 text-violet measure-760">{observations.roboticsNote}</p>
-        </div>
+        </ul>
+        <p className="caption mt-10">{observations.roboticsNote}</p>
       </Section>
 
       {/* Límites y próximos pasos */}
-      <Section layout="row" gap={48}>
-        {[limits, nextSteps].map((block) => (
-          <div key={block.eyebrow} className="stack gap-16 basis-420">
-            <Eyebrow>{block.eyebrow}</Eyebrow>
-            <h2 className="h2 h2--34">{block.title}</h2>
-            <p className="body">{block.text}</p>
+      <Section labelledBy="limits-title">
+        <div className="grid rule">
+          <div className="d-6 t-3 peer">
+            <h2 id="limits-title" className="h2">
+              {limits.title}
+            </h2>
+            <p className="prose--lede mt-8">{limits.text}</p>
           </div>
-        ))}
+          <div className="d-from-8 t-3 peer">
+            <h2 className="h3">{nextSteps.title}</h2>
+            <p className="secondary">{nextSteps.text}</p>
+          </div>
+        </div>
       </Section>
 
-      <CtaBand title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
+      <Closing id="closing-title" title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
     </>
   );
 }

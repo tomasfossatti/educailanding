@@ -1,13 +1,11 @@
 export const hero = {
-  eyebrow: "Quién soy",
   title: "Tomás Fossatti",
   subtitle:
     "Soy hijo y nieto de docentes. Vivo la educación desde adentro y construyo experiencias para que el aula tenga lo que el celular no te da.",
-  chips: ["Emprendedor", "Estudiante", "TEDx", "Córdoba, Argentina"],
+  facts: ["Emprendedor", "Estudiante", "TEDx", "Córdoba, Argentina"],
 };
 
 export const perspective = {
-  eyebrow: "Perspectiva",
   title: "Ir a clase tiene que valer la pena. Enseñar también.",
   paragraphs: [
     "Mi pregunta guía es esta: «Si puedo aprender en casa, ¿para qué ir a clase?». Hoy creo que una clase tiene que darte algo más difícil de conseguir que una buena explicación: la pregunta que te daba vergüenza hacer, la discusión con alguien que piensa distinto, un desafío que no podés resolver solo.",
@@ -17,7 +15,6 @@ export const perspective = {
 };
 
 export const projects = {
-  eyebrow: "Proyectos",
   title: "Donde pongo a prueba estas ideas",
   intro:
     "Uno para estudiantes y otro para docentes. Los dos buscan que el aula tenga lo que el celular no te da.",
@@ -32,13 +29,12 @@ export const projects = {
       label: "Startup ed-tech · Docentes",
       title: "Educai",
       text: "Los estudiantes estudian con un tutor de IA basado en los materiales de la materia, y el docente ve patrones del grupo sobre qué preguntas se repiten para decidir qué hacer en clase.",
-      link: "Conocer el producto →",
+      link: "Conocer el producto",
     },
   ],
 };
 
 export const talks = {
-  eyebrow: "Exposiciones",
   title: "Ideas puestas en conversación",
   tedx: {
     label: "Charla TEDx · 6 de noviembre de 2025",
@@ -58,7 +54,7 @@ export const talks = {
   congress: {
     label: "Congreso Innova Educa 21",
     title: "Póster con los resultados del test de Educai",
-    link: "Ver los resultados →",
+    link: "Ver los resultados",
   },
   interview: {
     label: "Entrevista · 4 de junio de 2025",
@@ -68,7 +64,6 @@ export const talks = {
 };
 
 export const contact = {
-  eyebrow: "Contacto",
   title: "¿Estás pensando en problemas parecidos?",
   text: "Quiero hablar con más docentes, responsables académicos y founders que construyen experiencias de aprendizaje. Si das clases en una institución privada y querés incorporar Educai en tu cátedra, escribime.",
   cta: "Hablemos",

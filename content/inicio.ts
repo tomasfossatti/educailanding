@@ -1,5 +1,4 @@
 export const hero = {
-  eyebrow: "Educai · Tutor de IA para el aula",
   title: "Si la IA ya lo sabe todo, ¿para qué ir a clase?",
   subtitle:
     "Educai es una plataforma con IA que convierte las conversaciones de estudio en información útil para que el docente decida mejor sus clases.",
@@ -8,7 +7,10 @@ export const hero = {
 };
 
 export const chatMock = {
+  label: "Ilustración de Educai con datos de ejemplo",
   studentLabel: "Lo que hace el estudiante",
+  studentSpeaker: "Estudiante",
+  tutorSpeaker: "Tutor de Educai",
   question: "¿Cómo uso el punto de equilibrio en mi emprendimiento?",
   answer: "Empecemos por tus costos fijos. ¿Cuáles tenés hoy?",
   teacherLabel: "Lo que ve el docente",
@@ -21,7 +23,6 @@ export const chatMock = {
 };
 
 export const tension = {
-  eyebrow: "Esto nos pasa",
   title: "Dos personas en la misma aula que no terminan de conectar",
   columns: [
     {
@@ -48,7 +49,6 @@ export const tension = {
 };
 
 export const whyItMatters = {
-  eyebrow: "Por qué me importa",
   title: "Soy estudiante, hijo y nieto de docentes",
   paragraphs: [
     "Crecí entre bibliotecas, libros, hojas y marcadores. Recuerdo a mi abuela con su guardapolvo blanco, corrigiendo con un lápiz rojo, y los domingos en mi casa, cuando mi mamá podía estar hasta las once de la noche preparando sus clases.",
@@ -56,11 +56,10 @@ export const whyItMatters = {
     "Hay algo que nunca terminé de entender: ¿por qué un docente tendría que depender solo de esa pasión para hacer un trabajo extraordinario? Y al mismo tiempo, ¿cómo conseguimos que los estudiantes encontremos tanto valor en las clases que no queramos perdernos ninguna?",
     "Esas preguntas me llevaron a construir Educai.",
   ],
-  link: "Conocer quién está detrás de Educai →",
+  link: "Conocer quién está detrás de Educai",
 };
 
 export const product = {
-  eyebrow: "El producto",
   title: "Un tutor para el estudiante y evidencia para el docente",
   audiences: [
     {
@@ -74,6 +73,7 @@ export const product = {
       text: "Recibe patrones del grupo sobre los temas que generan dudas, las preguntas que se repiten y qué podría hacer en la próxima clase. La decisión pedagógica sigue siendo suya.",
     },
   ],
+  principlesLabel: "Cuatro reglas del producto",
   principles: [
     {
       title: "El docente decide",
@@ -95,7 +95,6 @@ export const product = {
 };
 
 export const cycle = {
-  eyebrow: "El ciclo que probamos en clase",
   title:
     "Cinco pasos que ya aplicamos en una materia universitaria y en una escuela de robótica",
   steps: [
@@ -111,11 +110,11 @@ export const cycle = {
   highlightLabel: "Aporte innovador",
   highlight:
     "El feedback anónimo guía al docente sobre qué dinámica usar en la clase siguiente.",
-  link: "Ver cómo funciona por dentro →",
+  link: "Ver cómo funciona por dentro",
 };
 
 export const model = {
-  eyebrow: "Modelo en construcción",
+  status: "Modelo en construcción",
   title: "Que enseñar mejor valga más. Y que ir a clase también.",
   text: "Estamos desarrollando un modelo en el que las instituciones educativas privadas pagan por cada estudiante activo que usa Educai, durante un período acordado. Los docentes participan de lo que Educai cobra por la adopción en sus cátedras, y la intención es que su parte sea mayor que la nuestra.",
   stakeholders: [
@@ -129,24 +128,20 @@ export const model = {
       text: "Mejores herramientas para acompañar la evolución educativa de sus estudiantes.",
     },
   ],
+  disclaimerLabel: "Todavía no implementado",
   disclaimer:
     "El reparto a docentes todavía no está implementado. Estamos definiendo las condiciones de pago, cómo medimos la actividad real y cómo comprobamos que generamos valor educativo.",
 };
 
+/** El gráfico de aprobados sale de `approvals` en content/resultados.ts. */
 export const resultsTeaser = {
-  eyebrow: "Resultados del test",
   title: "Dos meses en una materia universitaria y en una escuela de robótica",
   stats: [
+    { label: "Terminaron el ciclo", value: "25 de 29", detail: "de los que lo empezaron." },
     {
-      value: "44 de 47",
-      label:
-        "aprobaron el 2.º parcial, con Educai disponible. En el 1.er parcial habían aprobado 33 de 47.",
-    },
-    { value: "25 de 29", label: "de los que empezaron el ciclo lo terminaron." },
-    {
+      label: "Valoración de la clase",
       value: "3–4",
-      label:
-        "fue la valoración promedio de la clase al final del período, en una escala de 1 a 4.",
+      detail: "promedio al final del período, en una escala de 1 a 4.",
     },
   ],
   disclaimer: "Observación sin grupo control. No atribuimos la mejora a Educai.",
@@ -154,7 +149,6 @@ export const resultsTeaser = {
 };
 
 export const closing = {
-  eyebrow: "Cohorte 2027",
   title: "Buscamos docentes e instituciones para el piloto 2027",
   text: "Queremos empezar en una cátedra, junto con sus docentes y estudiantes, y aprender de lo que ocurra en el aula. Si das clases en una institución privada y querés incorporar Educai en tu cátedra, completá el formulario y te escribimos.",
 };

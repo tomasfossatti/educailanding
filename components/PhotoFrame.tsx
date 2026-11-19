@@ -6,10 +6,9 @@ type PhotoFrameProps = {
   /** "portrait" = 4:5 alineada arriba (TEDx). "landscape" = 3:2 (ferias y mentores). */
   ratio: "portrait" | "landscape";
   caption?: string;
-  /** Sólo la foto del hero de Quién soy se carga sin diferir. */
+  /** Sólo la foto del inicio de Quién soy se carga sin diferir. */
   preload?: boolean;
   sizes: string;
-  hero?: boolean;
   className?: string;
 };
 
@@ -19,7 +18,6 @@ export function PhotoFrame({
   caption,
   preload = false,
   sizes,
-  hero = false,
   className = "",
 }: PhotoFrameProps) {
   const image = (
@@ -31,7 +29,7 @@ export function PhotoFrame({
       sizes={sizes}
       preload={preload}
       loading={preload ? undefined : "lazy"}
-      className={`photo photo--${ratio}${hero ? " photo--hero" : ""}`}
+      className={`photo photo--${ratio}`}
     />
   );
 
@@ -40,9 +38,9 @@ export function PhotoFrame({
   }
 
   return (
-    <figure className={`stack gap-12 ${className}`.trim()}>
+    <figure className={`photo-figure ${className}`.trim()}>
       {image}
-      <figcaption className="photo-caption">{caption}</figcaption>
+      <figcaption className="caption">{caption}</figcaption>
     </figure>
   );
 }

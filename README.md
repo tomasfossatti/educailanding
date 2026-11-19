@@ -15,7 +15,9 @@ npm run dev
 
 - Textos y datos de cada página: `content/inicio.ts`, `content/resultados.ts`, `content/tecnico.ts`, `content/quien-soy.ts`.
 - Formulario, Instagram, correo, enlace de TEDx y fotos: `content/site.ts`.
-- Colores, tipografías y espacios: los tokens están al principio de `app/globals.css`. El acento se cambia en `--accent` (alternativas: `#0F7C8A`, `#C2410C`, `#241F4A`).
+- Colores, tipografías y espacios: los tokens están al principio de `app/globals.css`, con su versión para modo oscuro justo debajo (se activa sola según el sistema). El sitio es monocromático: `--accent` vale lo mismo que el color del texto y se usa en botones y en la serie destacada de los gráficos.
+- Tipografía: Geist para todo el texto y Geist Mono solo para identificadores técnicos (por ejemplo `NO_DATA` o `DRAFT`).
+- Grilla: 12 columnas en escritorio, 6 en tablet y 4 en celular (`.grid` con las clases `d-*` y `t-*`).
 - Fotos: `public/photos/`.
 
 ## Despliegue
