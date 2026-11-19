@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { InView } from "./InView";
 
 export type Tone = "paper" | "sheet" | "kraft" | "board";
 
@@ -17,6 +18,8 @@ type SectionProps = {
   containerClassName?: string;
   id?: string;
   labelledBy?: string;
+  /** Los bloques aparecen al entrar en pantalla. Por defecto, en todas menos los héroes. */
+  reveal?: boolean;
   children: ReactNode;
 };
 
@@ -30,8 +33,10 @@ export function Section({
   containerClassName = "",
   id,
   labelledBy,
+  reveal,
   children,
 }: SectionProps) {
+  const shouldReveal = reveal ?? variant === "default";
   const classes = [
     "section",
     `section--${tone}`,
@@ -47,6 +52,7 @@ export function Section({
     layout,
     `gap-${gap}`,
     align ? `items-${align}` : "",
+    shouldReveal ? "reveal" : "",
     containerClassName,
   ]
     .filter(Boolean)
@@ -54,7 +60,11 @@ export function Section({
 
   return (
     <section id={id} className={classes} aria-labelledby={labelledBy}>
-      <div className={containerClasses}>{children}</div>
+      {shouldReveal ? (
+        <InView className={containerClasses}>{children}</InView>
+      ) : (
+        <div className={containerClasses}>{children}</div>
+      )}
     </section>
   );
 }

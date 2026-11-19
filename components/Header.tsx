@@ -12,6 +12,7 @@ import {
   ROUTES,
 } from "@/content/site";
 import { Button } from "./Button";
+import { Scribble } from "./Scribble";
 
 const MENU_ID = "menu-mobile";
 
@@ -95,7 +96,13 @@ export function Header() {
                     className="nav-link"
                     aria-current={link.isCurrent ? "page" : undefined}
                   >
-                    {link.label}
+                    {link.isCurrent ? (
+                      <Scribble variant="underline" animate={false}>
+                        {link.label}
+                      </Scribble>
+                    ) : (
+                      link.label
+                    )}
                   </Link>
                 </li>
               ))}
