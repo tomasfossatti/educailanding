@@ -1,9 +1,45 @@
+export const meta = {
+  title: "Funcionamiento técnico",
+  description:
+    "Cómo funciona Educai por dentro: tutor con contenido validado, patrones colectivos y privacidad desde la arquitectura.",
+};
+
 export const hero = {
+  /** Aviso para docentes. El link va a la sección de tres pasos de Inicio. */
+  notice: {
+    before: "Esta página es para quien quiere ver el detalle técnico. Si sos docente y querés lo esencial, mirá ",
+    link: "cómo funciona en tres pasos",
+    after: ".",
+  },
   eyebrow: "Funcionamiento técnico",
   title: "Cómo funciona Educai por dentro",
   subtitle:
-    "Educai ya funciona como un MVP desplegado en producción, con flujo de estudiante, flujo de docente y lógica analítica. Convierte conversaciones individuales en patrones colectivos sin construir perfiles de cada alumno.",
+    "Educai ya funciona como un MVP (producto mínimo viable: una primera versión completa y en uso) desplegado en producción, con flujo de estudiante, flujo de docente y lógica analítica. Convierte conversaciones individuales en patrones colectivos sin construir perfiles de cada alumno.",
+  stackLabel: "Tecnologías",
   stack: ["Next.js", "React", "TypeScript", "PostgreSQL", "Prisma", "Render"],
+};
+
+/** El ciclo de cinco pasos que se probó en clase (antes estaba en Inicio). */
+export const testedCycle = {
+  eyebrow: "El ciclo que probamos en clase",
+  title:
+    "Cinco pasos que ya aplicamos en una materia universitaria y en una escuela de robótica",
+  steps: [
+    {
+      title: "Onboarding",
+      text: "Una primera charla que detecta el perfil y los intereses del estudiante.",
+    },
+    { title: "Contenido", text: "Orientado a su proyecto o emprendimiento." },
+    {
+      title: "Conversación",
+      text: "El estudiante la comparte y llega al docente de forma anónima.",
+    },
+    { title: "Feedback", text: "La devolución de los estudiantes: anónima, de 1 a 4 estrellas." },
+    { title: "Clase", text: "Dinámicas y herramientas interactivas." },
+  ],
+  highlightLabel: "Aporte innovador",
+  highlight:
+    "El feedback anónimo guía al docente sobre qué dinámica usar en la clase siguiente.",
 };
 
 export const fullCycle = {
@@ -39,6 +75,8 @@ export const validatedTutor = {
     "Educai conserva la trazabilidad de qué fragmentos se usaron en cada respuesta. Hoy la búsqueda es principalmente léxica, y todavía no usa embeddings ni una base vectorial.",
   ],
   ragLabel: "Flujo de recuperación (RAG)",
+  ragIntro:
+    "RAG quiere decir que, antes de responder, Educai busca en los materiales del docente y responde a partir de lo que encuentra.",
   rag: [
     "El docente carga el material.",
     "Educai extrae el texto y lo divide en fragmentos.",
@@ -49,6 +87,10 @@ export const validatedTutor = {
   ],
 };
 
+/** El mensaje de ejemplo que ve el docente. También lo muestra el panel del hero. */
+const signalsExampleText =
+  "Varios participantes muestran señales relacionadas con dificultades para distinguir correlación y causalidad.";
+
 export const signals = {
   eyebrow: "Del chat al patrón colectivo",
   title: "Educai busca señales y agrega evidencia por participante",
@@ -56,26 +98,35 @@ export const signals = {
     "Además de guardar la conversación que necesita el estudiante, Educai la analiza y detecta preguntas, confusiones, reformulaciones, conceptos involucrados, tipos de explicación y señales de comprensión. La IA devuelve el análisis bajo un esquema estructurado que se valida antes de guardarlo, y esas señales son observaciones sobre la conversación, sin convertirse en una nota.",
     "Para que una conversación intensa de una sola persona no distorsione el resultado, la agregación cuenta participantes independientes y deja de lado la cantidad de mensajes.",
   ],
+  statesLabel: "Estados de evidencia",
   states: [
-    { code: "NO_DATA", text: "No hay señales suficientes para ese concepto." },
+    { code: "NO_DATA", name: "Sin datos", text: "No hay señales suficientes para ese concepto." },
     {
       code: "INSUFFICIENT",
+      name: "Pocas personas todavía",
       text: "Hay señales, pero en pocas personas. Educai lo reconoce y evita convertirlo en una conclusión grupal.",
     },
     {
       code: "SUFFICIENT",
+      name: "Evidencia suficiente",
       text: "El patrón aparece en al menos 3 participantes independientes (umbral configurable) y se muestra al docente como evidencia agregada.",
     },
   ],
   exampleLabel: "Ejemplo del mensaje que ve el docente",
-  example:
-    "«Varios participantes muestran señales relacionadas con dificultades para distinguir correlación y causalidad.»",
+  exampleText: signalsExampleText,
+  example: `«${signalsExampleText}»`,
   exampleNote: "Educai evita los diagnósticos individuales y habla del grupo.",
 };
+
+/** La recomendación de ejemplo que también muestra el panel del hero. */
+export const recommendationExample =
+  "Usar dos casos comparativos donde exista una correlación sin relación causal.";
 
 export const insights = {
   eyebrow: "Insights y seguimiento",
   title: "De la evidencia a la acción en clase",
+  intro:
+    "Un insight es lo que Educai le muestra al docente cuando un patrón aparece en el grupo con evidencia suficiente.",
   items: [
     {
       title: "Insight",
@@ -83,7 +134,7 @@ export const insights = {
     },
     {
       title: "Recomendación",
-      text: "Concreta, ligada a la evidencia y ejecutable en una clase. Por ejemplo: usar dos casos comparativos donde exista una correlación sin relación causal.",
+      text: `Concreta, ligada a la evidencia y ejecutable en una clase. Por ejemplo: ${recommendationExample.charAt(0).toLowerCase()}${recommendationExample.slice(1)}`,
     },
     {
       title: "Intervención",
@@ -102,6 +153,9 @@ export const privacy = {
   title: "Identidad, análisis y agregación van por separado",
   text: "La conversación pertenece a la experiencia privada del estudiante. Las señales se transforman antes de llegar al docente, que trabaja sobre el insight del grupo y no sobre un expediente individual.",
   flowLabel: "Recorrido de los datos",
+  /** Nota al margen entre «Análisis» y «Pseudonimización». */
+  flowNote: "acá se separa la identidad",
+  flowNoteAfter: "Análisis",
   flow: [
     "Alumno identificado",
     "Conversación",
@@ -128,7 +182,8 @@ export const privacy = {
 };
 
 export const roadmap = {
-  eyebrow: "Hacia dónde va · especificado, todavía no construido",
+  eyebrow: "Hacia dónde va",
+  stamp: "Especificado, todavía no construido",
   title: "De la evidencia a la próxima decisión",
   intro:
     "Además del MVP, tenemos escritas las especificaciones (versión 1.0) de la capa que sigue. Las incluimos acá porque muestran cómo pensamos el producto, pero no las contamos como funcionalidades existentes.",

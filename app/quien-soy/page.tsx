@@ -56,6 +56,7 @@ export default function QuienSoyPage() {
           </h2>
         </div>
         <div className="stack gap-22 basis-480 body-lg">
+          <p>{perspective.question}</p>
           {perspective.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}

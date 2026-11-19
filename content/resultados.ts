@@ -1,3 +1,11 @@
+import type { UnitRow } from "@/components/UnitChart";
+
+export const meta = {
+  title: "Resultados del test",
+  description:
+    "Qué pasó durante dos meses en una materia universitaria y en una escuela de robótica.",
+};
+
 export const intro = {
   eyebrow: "Resultados del test",
   title:
@@ -11,41 +19,72 @@ export const intro = {
   ],
 };
 
+export const NO_CONTROL_DISCLAIMER = "Observación sin grupo control. No atribuimos la mejora a Educai.";
+
 /** Datos del póster de Innova Educa 21. */
 export const approvals = {
+  eyebrow: "Aprobados por parcial",
   title: "Aprobados por parcial",
   total: 47,
   bars: [
     {
-      label: "1.er parcial, antes de Educai (33 de 47)",
+      label: "1.er parcial, antes de Educai",
+      exam: "el 1.er parcial",
       approved: 33,
-      percent: 70,
       tone: "muted" as const,
     },
     {
-      label: "2.º parcial, con Educai disponible (44 de 47)",
+      label: "2.º parcial, con Educai disponible",
+      exam: "el 2.º parcial",
       approved: 44,
-      percent: 94,
-      tone: "highlight" as const,
+      tone: "accent" as const,
     },
   ],
   reading: "La aprobación fue mayor y coincide con Educai, sin atribución causal.",
+  disclaimer: NO_CONTROL_DISCLAIMER,
 };
 
+const [firstExam, secondExam] = approvals.bars;
+
+/** Filas del gráfico de unidades: cada estudiante es un punto. */
+export const approvalRows: UnitRow[] = approvals.bars.map((bar) => ({
+  label: bar.label,
+  value: `${bar.approved} de ${approvals.total}`,
+  ariaLabel: `${bar.approved} de ${approvals.total} estudiantes aprobaron ${bar.exam}`,
+  filled: bar.approved,
+  total: approvals.total,
+  tone: bar.tone,
+}));
+
+/** La diferencia entre parciales, calculada de los datos. */
+export const approvalsDiffNote = `${secondExam.approved - firstExam.approved} estudiantes más aprobaron`;
+
+const usedUniversity = 29;
+const completedUniversity = 25;
+const roboticsStudents = 20;
+const notUsed = approvals.total - usedUniversity;
+
+/** Valoración promedio de la clase, en una escala de 1 a 4. */
+export const rating = { start: "1–2", end: "3–4" };
+
 export const adoption = {
+  eyebrow: "Adopción",
   title: "Adopción de Educai",
   rows: [
-    { label: "Universidad: lo usaron", value: 29, total: 47 },
-    { label: "Universidad: completaron el ciclo", value: 25, total: 47 },
-    { label: "Robótica: lo usaron", value: 20, total: 20 },
-    { label: "Robótica: completaron el ciclo", value: 20, total: 20 },
+    { label: "Universidad: lo usaron", value: usedUniversity, total: approvals.total },
+    { label: "Universidad: completaron el ciclo", value: completedUniversity, total: approvals.total },
+    { label: "Robótica: lo usaron", value: roboticsStudents, total: roboticsStudents },
+    { label: "Robótica: completaron el ciclo", value: roboticsStudents, total: roboticsStudents },
   ],
-  reading:
-    "29 de 47 estudiantes (62 %) usaron Educai con asistencia estable, lo que sugiere uso fuera del aula.",
+  ariaLabel: "Adopción de Educai por grupo",
+  reading: `${usedUniversity} de ${approvals.total} estudiantes (62 %) usaron Educai con asistencia estable, lo que sugiere uso fuera del aula.`,
   stats: [
-    { value: "25 de 29", label: "de los que empezaron el ciclo lo terminaron." },
     {
-      value: "1–2 a 3–4",
+      value: `${completedUniversity} de ${usedUniversity}`,
+      label: "de los que empezaron el ciclo lo terminaron.",
+    },
+    {
+      value: `${rating.start} a ${rating.end}`,
       label:
         "fue la valoración promedio de la clase entre el inicio y el final del período, en una escala de 1 a 4.",
     },
@@ -53,6 +92,7 @@ export const adoption = {
 };
 
 export const observations = {
+  eyebrow: "En el aula",
   title: "Lo que observamos en clase",
   items: [
     {
@@ -68,23 +108,52 @@ export const observations = {
       text: "Al ver el efecto de sus clases, el docente se sintió más motivado.",
     },
   ],
-  roboticsNote:
-    "En la escuela de robótica, los 20 estudiantes usaron Educai y los 20 completaron el ciclo, con ejercicios adaptados a la fase de cada proyecto.",
+  roboticsNote: `En la escuela de robótica, los ${roboticsStudents} estudiantes usaron Educai y los ${roboticsStudents} completaron el ciclo, con ejercicios adaptados a la fase de cada proyecto.`,
 };
+
+/** Lo que sabemos: una sola fuente para Inicio y Resultados. */
+export const knownFacts = [
+  `Con Educai disponible, aprobaron el 2.º parcial ${secondExam.approved} de ${approvals.total} estudiantes (en el 1.º, ${firstExam.approved} de ${approvals.total}).`,
+  `${completedUniversity} de los ${usedUniversity} que empezaron el ciclo lo terminaron.`,
+  `En la escuela de robótica, los ${roboticsStudents} estudiantes lo usaron y lo completaron.`,
+];
 
 export const limits = {
   eyebrow: "Límites del test",
   title: "Lo que todavía no podemos afirmar",
-  text: "El diseño fue observacional y no tuvo grupo control. El anonimato impide vincular el uso con el desempeño de cada estudiante, no se controló la dificultad de los parciales y no conocemos las razones por las que 18 estudiantes no lo usaron.",
+  knownTitle: "Lo que sabemos",
+  unknownTitle: "Lo que todavía no",
+  known: knownFacts,
+  unknown: [
+    "El diseño fue observacional y no tuvo grupo control.",
+    "El anonimato impide vincular el uso con el desempeño de cada estudiante.",
+    "No se controló la dificultad de los parciales.",
+    `No conocemos las razones por las que ${notUsed} estudiantes no lo usaron.`,
+  ],
 };
 
 export const nextSteps = {
   eyebrow: "Próximos pasos",
   title: "Qué vamos a medir en 2027",
-  text: "Vamos a sumar un grupo control, a estudiar por qué 18 estudiantes no lo usaron y a medir el impacto en el aprendizaje.",
+  intro: "Vamos a:",
+  items: [
+    "Sumar un grupo control.",
+    `Estudiar por qué ${notUsed} estudiantes no lo usaron.`,
+    "Medir el impacto en el aprendizaje.",
+  ],
+};
+
+/** TODO(material): MATERIAL.posterInnovaEduca. Sin imagen, la sección no se muestra. */
+export const poster = {
+  eyebrow: "Congreso Innova Educa 21",
+  title: "El póster con los resultados",
+  caption: "Póster presentado en el congreso Innova Educa 21.",
+  link: "Ver el póster en grande",
 };
 
 export const closing = {
   title: "Sumate a la cohorte 2027 y ayudanos a medir el impacto",
   text: "Buscamos docentes e instituciones que quieran probar Educai con un grupo control.",
 };
+
+export const facts = { notUsed, roboticsStudents, usedUniversity, completedUniversity };

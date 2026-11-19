@@ -1,20 +1,16 @@
 import type { Metadata } from "next";
 import { Button, TextLink } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { ChatMock } from "@/components/ChatMock";
+import { TeacherPanelMock } from "@/components/TeacherPanelMock";
 import { CtaBand } from "@/components/CtaBand";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
-import { Stat } from "@/components/Stat";
-import { StepList } from "@/components/StepList";
 import {
   closing,
-  cycle,
   hero,
   model,
-  product,
-  resultsTeaser,
+  teacherPanel,
   tension,
   whyItMatters,
 } from "@/content/inicio";
@@ -46,7 +42,7 @@ export default function InicioPage() {
             </Button>
           </div>
         </div>
-        <ChatMock />
+        <TeacherPanelMock content={teacherPanel} />
       </Section>
 
       {/* Esto nos pasa */}
@@ -85,39 +81,6 @@ export default function InicioPage() {
         </div>
       </Section>
 
-      {/* El producto */}
-      <Section tone="sheet" labelledBy="product-title">
-        <SectionHeading eyebrow={product.eyebrow} title={product.title} id="product-title" />
-        <div className="row gap-24">
-          {product.audiences.map((audience) => (
-            <Card key={audience.label} variant="kraft" padding="lg" gap={12} basis={420}>
-              <p className="eyebrow">{audience.label}</p>
-              <h3 className="h3 h3--26">{audience.title}</h3>
-              <p className="card-text">{audience.text}</p>
-            </Card>
-          ))}
-        </div>
-        <ul className="row gap-20">
-          {product.principles.map((principle) => (
-            <Card key={principle.title} as="li" variant="outline" padding="sm" gap={8} basis={240}>
-              <h3 className="h3 h3--19">{principle.title}</h3>
-              <p className="small-text">{principle.text}</p>
-            </Card>
-          ))}
-        </ul>
-      </Section>
-
-      {/* El ciclo que probamos en clase */}
-      <Section labelledBy="cycle-title">
-        <SectionHeading eyebrow={cycle.eyebrow} title={cycle.title} id="cycle-title" />
-        <StepList steps={cycle.steps} />
-        <Card variant="board" padding="md" gap={8}>
-          <p className="label">{cycle.highlightLabel}</p>
-          <p className="highlight-text">{cycle.highlight}</p>
-        </Card>
-        <TextLink href={ROUTES.tecnico}>{cycle.link}</TextLink>
-      </Section>
-
       {/* Modelo en construcción */}
       <Section tone="board" labelledBy="model-title">
         <SectionHeading eyebrow={model.eyebrow} title={model.title} id="model-title">
@@ -132,22 +95,6 @@ export default function InicioPage() {
           ))}
         </ul>
         <p className="callout measure-820">{model.disclaimer}</p>
-      </Section>
-
-      {/* Teaser de resultados */}
-      <Section tone="kraft" gap={32} labelledBy="results-title">
-        <SectionHeading eyebrow={resultsTeaser.eyebrow} title={resultsTeaser.title} id="results-title" />
-        <div className="row gap-24">
-          {resultsTeaser.stats.map((stat) => (
-            <Stat key={stat.value} value={stat.value} label={stat.label} />
-          ))}
-        </div>
-        <p className="note">{resultsTeaser.disclaimer}</p>
-        <div className="row">
-          <Button href={ROUTES.resultados} variant="secondary">
-            {resultsTeaser.link}
-          </Button>
-        </div>
       </Section>
 
       {/* Cierre */}

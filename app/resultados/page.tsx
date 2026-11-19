@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { ColumnChart, HorizontalBarChart } from "@/components/BarChart";
+import { HorizontalBarChart } from "@/components/BarChart";
+import { UnitChart } from "@/components/UnitChart";
 import { Card } from "@/components/Card";
 import { CtaBand } from "@/components/CtaBand";
 import { Eyebrow } from "@/components/Eyebrow";
@@ -7,10 +8,11 @@ import { Section } from "@/components/Section";
 import { Stat } from "@/components/Stat";
 import {
   adoption,
+  approvalRows,
   approvals,
+  approvalsDiffNote,
   closing,
   intro,
-  limits,
   nextSteps,
   observations,
 } from "@/content/resultados";
@@ -48,9 +50,13 @@ export default function ResultadosPage() {
       <Section tone="board" labelledBy="observations-title">
         <div className="row gap-24">
           <Card variant="board" gap={20} basis={380}>
-            <h2 className="h2 h2--22">{approvals.title}</h2>
-            <ColumnChart bars={approvals.bars} />
-            <p className="note">{approvals.reading}</p>
+            <UnitChart
+              caption={approvals.title}
+              rows={approvalRows}
+              diffNote={approvalsDiffNote}
+              notes={[approvals.reading, approvals.disclaimer]}
+              headingLevel="h2"
+            />
           </Card>
           <Card variant="board" gap={20} basis={380}>
             <h2 className="h2 h2--22">{adoption.title}</h2>
@@ -83,13 +89,16 @@ export default function ResultadosPage() {
 
       {/* Límites y próximos pasos */}
       <Section layout="row" gap={48}>
-        {[limits, nextSteps].map((block) => (
-          <div key={block.eyebrow} className="stack gap-16 basis-420">
-            <Eyebrow>{block.eyebrow}</Eyebrow>
-            <h2 className="h2 h2--34">{block.title}</h2>
-            <p className="body">{block.text}</p>
-          </div>
-        ))}
+        <div className="stack gap-16 basis-420">
+          <Eyebrow>{nextSteps.eyebrow}</Eyebrow>
+          <h2 className="h2">{nextSteps.title}</h2>
+          <p className="body">{nextSteps.intro}</p>
+          <ol className="stack gap-8">
+            {nextSteps.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ol>
+        </div>
       </Section>
 
       <CtaBand title={closing.title} text={closing.text} cta={{ href: FORM_URL, label: PILOT_CTA }} />
