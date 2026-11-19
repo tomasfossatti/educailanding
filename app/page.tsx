@@ -37,7 +37,7 @@ export default function InicioPage() {
       <Section variant="hero" layout="row" gap={56} align="center">
         <div className="stack gap-28 basis-480">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
-          <h1 className="h1">{hero.title}</h1>
+          <h1 className="h1 h1--display">{hero.title}</h1>
           <p className="lead measure-560">{hero.subtitle}</p>
           <div className="row gap-14 pt-8">
             <Button href={FORM_URL}>{hero.primaryCta}</Button>
@@ -55,7 +55,7 @@ export default function InicioPage() {
         <div className="row gap-24">
           {tension.columns.map((column) => (
             <Card key={column.title} variant="dark" padding="p32" gap={16} basis={420}>
-              <h3 className="h3 h3--28 text-violet">{column.title}</h3>
+              <h3 className="h3 h3--28 text-chalk">{column.title}</h3>
               <ul className="stack gap-16">
                 {column.items.map((item) => (
                   <li key={item} className="body">
@@ -126,7 +126,7 @@ export default function InicioPage() {
         <ul className="row gap-24">
           {model.stakeholders.map((item) => (
             <Card key={item.title} as="li" variant="dark" gap={10} basis={260}>
-              <h3 className="h3 h3--22 text-violet">{item.title}</h3>
+              <h3 className="h3 h3--22 text-chalk">{item.title}</h3>
               <p className="card-text">{item.text}</p>
             </Card>
           ))}

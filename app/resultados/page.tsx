@@ -77,7 +77,7 @@ export default function ResultadosPage() {
               </Card>
             ))}
           </ol>
-          <p className="note--15 text-violet measure-760">{observations.roboticsNote}</p>
+          <p className="note--15 text-chalk measure-760">{observations.roboticsNote}</p>
         </div>
       </Section>
 
