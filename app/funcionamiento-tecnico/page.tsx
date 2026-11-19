@@ -39,15 +39,15 @@ export default function TecnicoPage() {
         <Eyebrow>{hero.eyebrow}</Eyebrow>
         <h1 className="h1 h1--compact measure-820">{hero.title}</h1>
         <p className="lead measure-780">{hero.subtitle}</p>
-        <ChipList items={hero.stack} size="sm" label="Tecnologías" />
+        <ChipList items={hero.stack} label="Tecnologías" />
         <div className="row pt-8">
           <Button href={FORM_URL}>{PILOT_CTA}</Button>
         </div>
       </Section>
 
       {/* El ciclo completo */}
-      <Section tone="white" labelledBy="cycle-title">
-        <SectionHeading eyebrow={fullCycle.eyebrow} title={fullCycle.title} id="cycle-title" size={38} />
+      <Section tone="sheet" labelledBy="cycle-title">
+        <SectionHeading eyebrow={fullCycle.eyebrow} title={fullCycle.title} id="cycle-title" />
         <StepList steps={fullCycle.steps} variant="inline" />
       </Section>
 
@@ -71,13 +71,11 @@ export default function TecnicoPage() {
       </Section>
 
       {/* Del chat al patrón colectivo */}
-      <Section tone="ink" labelledBy="signals-title">
+      <Section tone="board" labelledBy="signals-title">
         <SectionHeading
           eyebrow={signals.eyebrow}
           title={signals.title}
           id="signals-title"
-          size={38}
-          measure={820}
         >
           {signals.paragraphs.map((paragraph) => (
             <p key={paragraph} className="body">
@@ -87,7 +85,7 @@ export default function TecnicoPage() {
         </SectionHeading>
         <ul className="row gap-24">
           {signals.states.map((state) => (
-            <Card key={state.code} as="li" variant="dark" gap={10} basis={280}>
+            <Card key={state.code} as="li" variant="board" gap={10} basis={280}>
               <h3 className="h3 h3--22 state-code">{state.code}</h3>
               <p className="card-text">{state.text}</p>
             </Card>
@@ -102,10 +100,10 @@ export default function TecnicoPage() {
 
       {/* Insights y seguimiento */}
       <Section labelledBy="insights-title">
-        <SectionHeading eyebrow={insights.eyebrow} title={insights.title} id="insights-title" size={38} measure={820} />
+        <SectionHeading eyebrow={insights.eyebrow} title={insights.title} id="insights-title" />
         <ul className="row gap-24">
           {insights.items.map((item) => (
-            <Card key={item.title} as="li" variant="surface" gap={10} basis={280}>
+            <Card key={item.title} as="li" variant="sheet" gap={10} basis={280}>
               <h3 className="h3">{item.title}</h3>
               <p className="card-text">{item.text}</p>
             </Card>
@@ -115,8 +113,8 @@ export default function TecnicoPage() {
       </Section>
 
       {/* Privacidad desde la arquitectura */}
-      <Section tone="tint" labelledBy="privacy-title">
-        <SectionHeading eyebrow={privacy.eyebrow} title={privacy.title} id="privacy-title" size={38} measure={820}>
+      <Section tone="kraft" labelledBy="privacy-title">
+        <SectionHeading eyebrow={privacy.eyebrow} title={privacy.title} id="privacy-title">
           <p className="body">{privacy.text}</p>
         </SectionHeading>
         <ol className="flow" aria-label={privacy.flowLabel}>
@@ -124,7 +122,7 @@ export default function TecnicoPage() {
             const isLast = index === privacy.flow.length - 1;
             return (
               <li key={step}>
-                <Chip variant={isLast ? "accent" : "surface"}>{step}</Chip>
+                <Chip variant={isLast ? "done" : "default"}>{step}</Chip>
                 {isLast ? null : (
                   <span className="flow__arrow" aria-hidden="true">
                     →
@@ -136,7 +134,7 @@ export default function TecnicoPage() {
         </ol>
         <ul className="row gap-24">
           {privacy.items.map((item) => (
-            <Card key={item.title} as="li" variant="white" gap={10} basis={280}>
+            <Card key={item.title} as="li" variant="sheet" gap={10} basis={280}>
               <h3 className="h3">{item.title}</h3>
               <p className="card-text">{item.text}</p>
             </Card>
@@ -145,13 +143,13 @@ export default function TecnicoPage() {
       </Section>
 
       {/* Hacia dónde va: especificado, todavía no construido */}
-      <Section tone="dark" labelledBy="roadmap-title">
-        <SectionHeading eyebrow={roadmap.eyebrow} title={roadmap.title} id="roadmap-title" size={38} measure={820}>
+      <Section tone="board" labelledBy="roadmap-title">
+        <SectionHeading eyebrow={roadmap.eyebrow} title={roadmap.title} id="roadmap-title">
           <p className="body">{roadmap.intro}</p>
         </SectionHeading>
         <ul className="row gap-24">
           {roadmap.engines.map((engine) => (
-            <Card key={engine.title} as="li" variant="dark-raised" gap={12} basis={300}>
+            <Card key={engine.title} as="li" variant="board" gap={12} basis={300}>
               <h3 className="h3">{engine.title}</h3>
               {engine.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="card-text">
@@ -163,7 +161,7 @@ export default function TecnicoPage() {
         </ul>
         <ul className="row gap-24">
           {roadmap.proposals.map((proposal) => (
-            <Card key={proposal.title} as="li" variant="dark-outline-strong" gap={10} basis={420}>
+            <Card key={proposal.title} as="li" variant="board" gap={10} basis={420}>
               <h3 className="h3">{proposal.title}</h3>
               <p className="card-text">{proposal.text}</p>
             </Card>
@@ -173,11 +171,11 @@ export default function TecnicoPage() {
 
       {/* Estado actual del MVP */}
       <Section labelledBy="mvp-title">
-        <SectionHeading eyebrow={mvpStatus.eyebrow} title={mvpStatus.title} id="mvp-title" size={38} measure={820} />
+        <SectionHeading eyebrow={mvpStatus.eyebrow} title={mvpStatus.title} id="mvp-title" />
         <div className="row gap-48">
           {[
-            { ...mvpStatus.done, variant: "fill" as const },
-            { ...mvpStatus.pending, variant: "outline" as const },
+            { ...mvpStatus.done, variant: "done" as const },
+            { ...mvpStatus.pending, variant: "pending" as const },
           ].map((group) => (
             <div key={group.title} className="stack gap-16 basis-420">
               <h3 className="h3 h3--24">{group.title}</h3>
@@ -188,7 +186,7 @@ export default function TecnicoPage() {
         <p className="note note--15 measure-820">{mvpStatus.note}</p>
       </Section>
 
-      <CtaBand title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
+      <CtaBand title={closing.title} text={closing.text} cta={{ href: FORM_URL, label: PILOT_CTA }} />
     </>
   );
 }

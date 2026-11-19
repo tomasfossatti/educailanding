@@ -41,7 +41,7 @@ export default function InicioPage() {
           <p className="lead measure-560">{hero.subtitle}</p>
           <div className="row gap-14 pt-8">
             <Button href={FORM_URL}>{hero.primaryCta}</Button>
-            <Button href={ROUTES.resultados} variant="ghost">
+            <Button href={ROUTES.resultados} variant="secondary">
               {hero.secondaryCta}
             </Button>
           </div>
@@ -50,11 +50,11 @@ export default function InicioPage() {
       </Section>
 
       {/* Esto nos pasa */}
-      <Section tone="ink" gap={56} labelledBy="tension-title">
+      <Section tone="board" gap={56} labelledBy="tension-title">
         <SectionHeading eyebrow={tension.eyebrow} title={tension.title} id="tension-title" />
         <div className="row gap-24">
           {tension.columns.map((column) => (
-            <Card key={column.title} variant="dark" padding="p32" gap={16} basis={420}>
+            <Card key={column.title} variant="board" padding="lg" gap={16} basis={420}>
               <h3 className="h3 h3--28 text-chalk">{column.title}</h3>
               <ul className="stack gap-16">
                 {column.items.map((item) => (
@@ -86,11 +86,11 @@ export default function InicioPage() {
       </Section>
 
       {/* El producto */}
-      <Section tone="white" labelledBy="product-title">
+      <Section tone="sheet" labelledBy="product-title">
         <SectionHeading eyebrow={product.eyebrow} title={product.title} id="product-title" />
         <div className="row gap-24">
           {product.audiences.map((audience) => (
-            <Card key={audience.label} variant="tint" padding="p32" gap={12} basis={420}>
+            <Card key={audience.label} variant="kraft" padding="lg" gap={12} basis={420}>
               <p className="eyebrow">{audience.label}</p>
               <h3 className="h3 h3--26">{audience.title}</h3>
               <p className="card-text">{audience.text}</p>
@@ -99,7 +99,7 @@ export default function InicioPage() {
         </div>
         <ul className="row gap-20">
           {product.principles.map((principle) => (
-            <Card key={principle.title} as="li" variant="outline" padding="p24" gap={8} basis={240}>
+            <Card key={principle.title} as="li" variant="outline" padding="sm" gap={8} basis={240}>
               <h3 className="h3 h3--19">{principle.title}</h3>
               <p className="small-text">{principle.text}</p>
             </Card>
@@ -111,7 +111,7 @@ export default function InicioPage() {
       <Section labelledBy="cycle-title">
         <SectionHeading eyebrow={cycle.eyebrow} title={cycle.title} id="cycle-title" />
         <StepList steps={cycle.steps} />
-        <Card variant="ink" padding="p28x32" gap={8}>
+        <Card variant="board" padding="md" gap={8}>
           <p className="label">{cycle.highlightLabel}</p>
           <p className="highlight-text">{cycle.highlight}</p>
         </Card>
@@ -119,13 +119,13 @@ export default function InicioPage() {
       </Section>
 
       {/* Modelo en construcción */}
-      <Section tone="ink" labelledBy="model-title">
-        <SectionHeading eyebrow={model.eyebrow} title={model.title} id="model-title" measure={820}>
+      <Section tone="board" labelledBy="model-title">
+        <SectionHeading eyebrow={model.eyebrow} title={model.title} id="model-title">
           <p className="body-lg">{model.text}</p>
         </SectionHeading>
         <ul className="row gap-24">
           {model.stakeholders.map((item) => (
-            <Card key={item.title} as="li" variant="dark" gap={10} basis={260}>
+            <Card key={item.title} as="li" variant="board" gap={10} basis={260}>
               <h3 className="h3 h3--22 text-chalk">{item.title}</h3>
               <p className="card-text">{item.text}</p>
             </Card>
@@ -135,7 +135,7 @@ export default function InicioPage() {
       </Section>
 
       {/* Teaser de resultados */}
-      <Section tone="tint" gap={36} labelledBy="results-title">
+      <Section tone="kraft" gap={32} labelledBy="results-title">
         <SectionHeading eyebrow={resultsTeaser.eyebrow} title={resultsTeaser.title} id="results-title" />
         <div className="row gap-24">
           {resultsTeaser.stats.map((stat) => (
@@ -144,7 +144,7 @@ export default function InicioPage() {
         </div>
         <p className="note">{resultsTeaser.disclaimer}</p>
         <div className="row">
-          <Button href={ROUTES.resultados} variant="ghost">
+          <Button href={ROUTES.resultados} variant="secondary">
             {resultsTeaser.link}
           </Button>
         </div>
@@ -152,13 +152,10 @@ export default function InicioPage() {
 
       {/* Cierre */}
       <CtaBand
-        tall
         eyebrow={closing.eyebrow}
         title={closing.title}
         text={closing.text}
-        href={FORM_URL}
-        cta={PILOT_CTA}
-        titleSize={42}
+        cta={{ href: FORM_URL, label: PILOT_CTA }}
       />
     </>
   );

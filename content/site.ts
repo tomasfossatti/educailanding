@@ -3,7 +3,14 @@ export const INSTAGRAM_URL = "https://www.instagram.com/tomasfossatti_/";
 export const EMAIL = "tomas.fossatti01@gmail.com";
 export const YOUTUBE_TEDX_URL = "https://www.youtube.com/watch?v=n1LSi7t5WKs";
 
+/** WhatsApp con texto prellenado. Mientras sea null, no se muestra en ningún lado. */
+export const WHATSAPP_URL: string | null = null; // TODO(material): https://wa.me/<número> con texto prellenado
+
 export const PILOT_CTA = "Sumate al piloto 2027";
+/** Versión corta del CTA para el header en desktop. */
+export const PILOT_CTA_SHORT = "Sumate al piloto";
+/** Versión mínima del CTA para el header en mobile, donde no entra la corta. */
+export const PILOT_CTA_TINY = "Sumate";
 
 export const ROUTES = {
   inicio: "/",
@@ -15,9 +22,32 @@ export const ROUTES = {
 export const NAV_LINKS = [
   { href: ROUTES.inicio, label: "Inicio" },
   { href: ROUTES.resultados, label: "Resultados" },
-  { href: ROUTES.tecnico, label: "Funcionamiento técnico" },
+  { href: ROUTES.tecnico, label: "Cómo funciona" },
   { href: ROUTES.quienSoy, label: "Quién soy" },
 ] as const;
+
+export const HEADER = {
+  logoLabel: "Educai, inicio",
+  navLabel: "Principal",
+  menu: "Menú",
+  menuClose: "Cerrar",
+};
+
+export const FOOTER = {
+  tagline: "Hecho en Córdoba, Argentina, por un hijo y nieto de docentes.",
+  founder: "Fundado por Tomás Fossatti",
+  navLabel: "Secciones del sitio",
+  contactLabel: "Contacto",
+  instagram: "Instagram",
+  whatsapp: "WhatsApp",
+  note: "Los resultados del test son observacionales y sin grupo control.",
+};
+
+/** Textos para lectores de pantalla de los componentes reutilizables. */
+export const A11Y = {
+  skipLink: "Saltar al contenido",
+  newTab: " (se abre en una pestaña nueva)",
+};
 
 /**
  * Base absoluta para metadatos, sitemap y Open Graph.

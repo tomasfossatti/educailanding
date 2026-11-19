@@ -35,7 +35,7 @@ export default function QuienSoyPage() {
           <Eyebrow>{hero.eyebrow}</Eyebrow>
           <h1 className="h1">{hero.title}</h1>
           <p className="lead measure-560">{hero.subtitle}</p>
-          <ChipList items={hero.chips} size="sm" />
+          <ChipList items={hero.chips} />
         </div>
         <PhotoFrame
           photo={PHOTOS.tedxEncendedorHero}
@@ -48,7 +48,7 @@ export default function QuienSoyPage() {
       </Section>
 
       {/* Perspectiva */}
-      <Section tone="ink" layout="row" gap={64} labelledBy="perspective-title">
+      <Section tone="board" layout="row" gap={64} labelledBy="perspective-title">
         <div className="stack gap-16 basis-380">
           <Eyebrow>{perspective.eyebrow}</Eyebrow>
           <h2 id="perspective-title" className="h2 h2--40">
@@ -64,12 +64,12 @@ export default function QuienSoyPage() {
 
       {/* Proyectos */}
       <Section labelledBy="projects-title">
-        <SectionHeading eyebrow={projects.eyebrow} title={projects.title} id="projects-title" size={38}>
+        <SectionHeading eyebrow={projects.eyebrow} title={projects.title} id="projects-title">
           <p className="body-lg">{projects.intro}</p>
         </SectionHeading>
         <ul className="row gap-24">
           {projects.items.map((project) => (
-            <Card key={project.title} as="li" variant="surface" padding="p32" gap={12} basis={420}>
+            <Card key={project.title} as="li" variant="sheet" padding="lg" gap={12} basis={420}>
               <p className="eyebrow">{project.label}</p>
               <h3 className="h3 h3--28">{project.title}</h3>
               <p className="card-text">{project.text}</p>
@@ -80,8 +80,8 @@ export default function QuienSoyPage() {
       </Section>
 
       {/* Exposiciones */}
-      <Section tone="white" gap={56} labelledBy="talks-title">
-        <SectionHeading eyebrow={talks.eyebrow} title={talks.title} id="talks-title" size={38} />
+      <Section tone="sheet" gap={56} labelledBy="talks-title">
+        <SectionHeading eyebrow={talks.eyebrow} title={talks.title} id="talks-title" />
 
         {/* TEDx */}
         <div className="row items-center gap-48">
@@ -142,12 +142,12 @@ export default function QuienSoyPage() {
 
         {/* Congreso y entrevista */}
         <div className="row gap-24">
-          <Card variant="tint" gap={10} basis={420}>
+          <Card variant="kraft" gap={10} basis={420}>
             <p className="eyebrow">{talks.congress.label}</p>
             <h3 className="h3 h3--22">{talks.congress.title}</h3>
             <TextLink href={ROUTES.resultados}>{talks.congress.link}</TextLink>
           </Card>
-          <Card variant="tint" gap={10} basis={420}>
+          <Card variant="kraft" gap={10} basis={420}>
             <p className="eyebrow">{talks.interview.label}</p>
             <h3 className="h3 h3--22">{talks.interview.title}</h3>
             <p className="small-text">{talks.interview.text}</p>
@@ -156,13 +156,10 @@ export default function QuienSoyPage() {
       </Section>
 
       <CtaBand
-        tall
         eyebrow={contact.eyebrow}
         title={contact.title}
         text={contact.text}
-        href={`mailto:${EMAIL}`}
-        cta={contact.cta}
-        titleSize={40}
+        cta={{ href: `mailto:${EMAIL}`, label: contact.cta }}
       />
     </>
   );

@@ -3,7 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { PHOTOS, SITE_URL } from "@/content/site";
+import { A11Y, PHOTOS, SITE_URL } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -47,10 +47,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-AR" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="es-AR" className={`${fraunces.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Marca que hay JS: recién ahí se aplican los estados iniciales de las animaciones. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         <a className="skip-link" href="#contenido">
-          Saltar al contenido
+          {A11Y.skipLink}
         </a>
         <Header />
         <main id="contenido">{children}</main>

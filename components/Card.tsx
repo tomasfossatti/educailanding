@@ -1,31 +1,27 @@
 import type { ElementType, ReactNode } from "react";
 
-type CardVariant =
-  | "surface"
-  | "white"
-  | "outline"
-  | "tint"
-  | "dark"
-  | "dark-raised"
-  | "dark-outline"
-  | "dark-outline-strong"
-  | "ink";
+export type CardVariant = "sheet" | "kraft" | "outline" | "board" | "note";
 
 type CardProps = {
-  variant: CardVariant;
-  padding?: "p24" | "p28" | "p32" | "p24x28" | "p28x32";
-  gap?: 4 | 6 | 8 | 10 | 12 | 16 | 20;
+  variant?: CardVariant;
+  /** sm = 22 px, md = 28 px (mobile 22 px), lg = 36 px (mobile 24 px). */
+  padding?: "sm" | "md" | "lg";
+  gap?: 6 | 8 | 10 | 12 | 16 | 20 | 24;
   basis?: 240 | 260 | 280 | 300 | 340 | 380 | 420;
+  /** Ficha clickeable: se eleva 2 px en hover. */
+  interactive?: boolean;
   as?: ElementType;
   className?: string;
   children: ReactNode;
 };
 
+/** "Ficha": la tarjeta del sitio. */
 export function Card({
-  variant,
-  padding = "p28",
+  variant = "sheet",
+  padding = "md",
   gap = 10,
   basis,
+  interactive = false,
   as: Tag = "div",
   className = "",
   children,
@@ -33,10 +29,10 @@ export function Card({
   const classes = [
     "card",
     `card--${variant}`,
-    padding !== "p28" ? `card--${padding}` : "",
+    padding !== "md" ? `card--${padding}` : "",
     `gap-${gap}`,
     basis ? `basis-${basis}` : "",
-    variant === "ink" ? "on-dark" : "",
+    interactive ? "card--interactive" : "",
     className,
   ]
     .filter(Boolean)

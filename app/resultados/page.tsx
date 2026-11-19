@@ -39,20 +39,20 @@ export default function ResultadosPage() {
         </div>
         <div className="row gap-24">
           {intro.context.map((item) => (
-            <Stat key={item.value} value={item.value} label={item.label} size={36} basis={240} />
+            <Stat key={item.value} value={item.value} label={item.label} />
           ))}
         </div>
       </Section>
 
       {/* Datos */}
-      <Section tone="ink" labelledBy="observations-title">
+      <Section tone="board" labelledBy="observations-title">
         <div className="row gap-24">
-          <Card variant="dark" gap={20} basis={380}>
+          <Card variant="board" gap={20} basis={380}>
             <h2 className="h2 h2--22">{approvals.title}</h2>
             <ColumnChart bars={approvals.bars} />
             <p className="note">{approvals.reading}</p>
           </Card>
-          <Card variant="dark" gap={20} basis={380}>
+          <Card variant="board" gap={20} basis={380}>
             <h2 className="h2 h2--22">{adoption.title}</h2>
             <HorizontalBarChart rows={adoption.rows} />
             <p className="note">{adoption.reading}</p>
@@ -61,7 +61,7 @@ export default function ResultadosPage() {
 
         <div className="row gap-24">
           {adoption.stats.map((stat) => (
-            <Stat key={stat.value} value={stat.value} label={stat.label} variant="dark" size={44} />
+            <Stat key={stat.value} value={stat.value} label={stat.label} />
           ))}
         </div>
 
@@ -71,7 +71,7 @@ export default function ResultadosPage() {
           </h2>
           <ol className="row gap-24">
             {observations.items.map((item) => (
-              <Card key={item.title} as="li" variant="dark-outline" padding="p24" gap={8} basis={260}>
+              <Card key={item.title} as="li" variant="board" padding="sm" gap={8} basis={260}>
                 <h3 className="h3 h3--20">{item.title}</h3>
                 <p className="small-text">{item.text}</p>
               </Card>
@@ -92,7 +92,7 @@ export default function ResultadosPage() {
         ))}
       </Section>
 
-      <CtaBand title={closing.title} text={closing.text} href={FORM_URL} cta={PILOT_CTA} />
+      <CtaBand title={closing.title} text={closing.text} cta={{ href: FORM_URL, label: PILOT_CTA }} />
     </>
   );
 }

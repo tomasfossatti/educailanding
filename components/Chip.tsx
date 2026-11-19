@@ -1,13 +1,17 @@
 import type { ReactNode } from "react";
 
+type ChipVariant = "default" | "done" | "pending";
+
 type ChipProps = {
-  variant?: "fill" | "outline" | "surface" | "accent";
-  size?: "sm" | "md";
+  variant?: ChipVariant;
+  /** Tipografía monoespaciada (stack técnico). */
+  mono?: boolean;
   children: ReactNode;
 };
 
-export function Chip({ variant = "fill", size = "md", children }: ChipProps) {
-  const classes = ["chip", `chip--${variant}`, size === "sm" ? "chip--sm" : ""]
+/** Etiqueta escolar en píldora. */
+export function Chip({ variant = "default", mono = false, children }: ChipProps) {
+  const classes = ["chip", variant !== "default" ? `chip--${variant}` : "", mono ? "chip--mono" : ""]
     .filter(Boolean)
     .join(" ");
   return <span className={classes}>{children}</span>;
@@ -15,20 +19,20 @@ export function Chip({ variant = "fill", size = "md", children }: ChipProps) {
 
 export function ChipList({
   items,
-  variant = "fill",
-  size = "md",
+  variant = "default",
+  mono = false,
   label,
 }: {
   items: readonly string[];
-  variant?: ChipProps["variant"];
-  size?: ChipProps["size"];
+  variant?: ChipVariant;
+  mono?: boolean;
   label?: string;
 }) {
   return (
-    <ul className="row gap-10" aria-label={label}>
+    <ul className="chip-list" aria-label={label}>
       {items.map((item) => (
         <li key={item}>
-          <Chip variant={variant} size={size}>
+          <Chip variant={variant} mono={mono}>
             {item}
           </Chip>
         </li>

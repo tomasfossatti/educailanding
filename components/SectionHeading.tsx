@@ -5,25 +5,16 @@ type SectionHeadingProps = {
   eyebrow?: ReactNode;
   title: ReactNode;
   id?: string;
-  /** Tamaño del H2: 42 (por defecto), 40, 38 o 34. */
-  size?: 42 | 40 | 38 | 34;
-  measure?: 760 | 820;
+  /** Texto debajo del título. */
   children?: ReactNode;
+  className?: string;
 };
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  id,
-  size = 42,
-  measure = 760,
-  children,
-}: SectionHeadingProps) {
-  const sizeClass = size === 42 ? "" : ` h2--${size}`;
+export function SectionHeading({ eyebrow, title, id, children, className = "" }: SectionHeadingProps) {
   return (
-    <div className={`stack gap-16 measure-${measure}`}>
+    <div className={`section-heading stack gap-16 ${className}`.trim()}>
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <h2 id={id} className={`h2${sizeClass}`}>
+      <h2 id={id} className="h2">
         {title}
       </h2>
       {children}
