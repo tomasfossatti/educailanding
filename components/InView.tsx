@@ -29,20 +29,18 @@ export function InView({ as: Tag = "div", children, ...rest }: InViewProps) {
       reveal();
       return;
     }
+    // Umbral de 0.25, salvo en bloques más altos que la pantalla, que nunca llegan
+    // al 25 %: a esos les alcanza con ocupar un cuarto de la ventana.
+    const height = element.getBoundingClientRect().height || 1;
+    const threshold = Math.min(0.25, (window.innerHeight * 0.25) / height);
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          // Un bloque más alto que la pantalla nunca llega al 25 %: alcanza con que
-          // ocupe un cuarto de la ventana.
-          const tallEnough = entry.intersectionRect.height >= window.innerHeight * 0.25;
-          if (entry.intersectionRatio >= 0.25 || tallEnough) {
-            reveal();
-            observer.disconnect();
-          }
+        if (entries.some((entry) => entry.isIntersecting)) {
+          reveal();
+          observer.disconnect();
         }
       },
-      { threshold: [0, 0.25, 0.5], rootMargin: "0px 0px -10% 0px" },
+      { threshold, rootMargin: "0px 0px -10% 0px" },
     );
     observer.observe(element);
     return () => observer.disconnect();

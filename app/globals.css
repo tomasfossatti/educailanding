@@ -25,7 +25,7 @@
   /* Resaltador */
   --highlight: #ffe873;      /* tinta encima 11,4:1 */
 
-  /* Pizarrón (reemplaza las secciones oscuras violetas) */
+  /* Pizarrón (reemplaza las secciones oscuras de antes) */
   --board: #1f3b33;
   --board-raised: #2a4a40;
   --board-rule: rgba(255, 255, 255, 0.14);
@@ -832,9 +832,20 @@ ol {
   color: var(--ink-soft);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 999px) {
   .site-footer__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .site-footer__grid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer__grid {
+    grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
 }

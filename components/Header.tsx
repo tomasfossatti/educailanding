@@ -12,6 +12,7 @@ import {
   ROUTES,
 } from "@/content/site";
 import { Button } from "./Button";
+import { LogoMark } from "./LogoMark";
 import { Scribble } from "./Scribble";
 
 const MENU_ID = "menu-mobile";
@@ -19,9 +20,7 @@ const MENU_ID = "menu-mobile";
 function Logo() {
   return (
     <Link href={ROUTES.inicio} className="logo" aria-label={HEADER.logoLabel}>
-      <span aria-hidden="true">
-        Educa<span className="logo__i">ı</span>
-      </span>
+      <LogoMark />
     </Link>
   );
 }

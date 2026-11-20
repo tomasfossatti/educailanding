@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { EMAIL, FOOTER, FORM_URL, INSTAGRAM_URL, NAV_LINKS, PILOT_CTA, WHATSAPP_URL, A11Y } from "@/content/site";
+import { EMAIL, FOOTER, FORM_URL, INSTAGRAM_URL, NAV_LINKS, PILOT_CTA, SITE_META, WHATSAPP_URL, A11Y } from "@/content/site";
 import { Button } from "./Button";
+import { LogoMark } from "./LogoMark";
 
 export function Footer() {
   return (
@@ -8,10 +9,10 @@ export function Footer() {
       <div className="container">
         <div className="site-footer__grid">
           <div className="stack gap-12">
-            <span className="footer-logo" aria-hidden="true">
-              Educa<span className="logo__i">ı</span>
+            <span className="footer-logo">
+              <LogoMark />
+              <span className="sr-only">{SITE_META.name}</span>
             </span>
-            <span className="sr-only">Educai</span>
             <p className="footer-text">{FOOTER.tagline}</p>
             <p className="footer-text">{FOOTER.founder}</p>
           </div>
