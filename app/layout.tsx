@@ -3,7 +3,8 @@ import { Fraunces, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { A11Y, PHOTOS, SITE_URL } from "@/content/site";
+import { meta } from "@/content/inicio";
+import { A11Y, EMAIL, INSTAGRAM_URL, SITE_META, SITE_URL } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,22 +24,28 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Educai: tutor de IA para el aula",
-  description:
-    "Educai convierte las conversaciones de estudio en información útil para que el docente decida mejor sus clases.",
+  title: { default: meta.title, template: `%s · ${SITE_META.name}` },
+  description: meta.description,
   openGraph: {
     type: "website",
     locale: "es_AR",
-    siteName: "Educai",
-    images: [
-      {
-        url: PHOTOS.tedxEncendedorHero.src,
-        width: PHOTOS.tedxEncendedorHero.width,
-        height: PHOTOS.tedxEncendedorHero.height,
-        alt: PHOTOS.tedxEncendedorHero.alt,
-      },
-    ],
+    siteName: SITE_META.name,
   },
+  twitter: { card: "summary_large_image" },
+};
+
+/** Datos estructurados de la organización. */
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_META.name,
+  description: meta.description,
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.svg`,
+  email: EMAIL,
+  sameAs: [INSTAGRAM_URL],
+  founder: { "@type": "Person", name: SITE_META.founder },
+  address: { "@type": "PostalAddress", addressLocality: "Córdoba", addressCountry: "AR" },
 };
 
 export const viewport: Viewport = {
@@ -59,6 +66,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
+        />
       </body>
     </html>
   );
