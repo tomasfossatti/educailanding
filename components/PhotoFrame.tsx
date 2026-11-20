@@ -6,10 +6,13 @@ type PhotoFrameProps = {
   /** "portrait" = 4:5 alineada arriba (TEDx). "landscape" = 3:2 (ferias y mentores). */
   ratio: "portrait" | "landscape";
   caption?: string;
-  /** Sólo la foto del hero de Quién soy se carga sin diferir. */
+  /** Solo la foto del hero de Quién soy se carga sin diferir. */
   preload?: boolean;
   sizes: string;
-  hero?: boolean;
+  /** Borde blanco de 8 px (o 10 px en "lg"), como una foto apoyada sobre la hoja. */
+  border?: "md" | "lg";
+  /** Rotación de collage: solo en collages y en la foto familiar. */
+  tilt?: "left" | "right";
   className?: string;
 };
 
@@ -19,30 +22,31 @@ export function PhotoFrame({
   caption,
   preload = false,
   sizes,
-  hero = false,
+  border = "md",
+  tilt,
   className = "",
 }: PhotoFrameProps) {
-  const image = (
-    <Image
-      src={photo.src}
-      alt={photo.alt}
-      width={photo.width}
-      height={photo.height}
-      sizes={sizes}
-      preload={preload}
-      loading={preload ? undefined : "lazy"}
-      className={`photo photo--${ratio}${hero ? " photo--hero" : ""}`}
-    />
-  );
-
-  if (!caption) {
-    return <div className={className}>{image}</div>;
-  }
-
+  const classes = [
+    "photo-frame",
+    `photo-frame--${border}`,
+    tilt ? `photo-frame--tilt-${tilt}` : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <figure className={`stack gap-12 ${className}`.trim()}>
-      {image}
-      <figcaption className="photo-caption">{caption}</figcaption>
+    <figure className={classes}>
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        width={photo.width}
+        height={photo.height}
+        sizes={sizes}
+        preload={preload}
+        loading={preload ? undefined : "lazy"}
+        className={`photo photo--${ratio}`}
+      />
+      {caption ? <figcaption className="photo-caption">{caption}</figcaption> : null}
     </figure>
   );
 }

@@ -2,18 +2,20 @@ type HBarRow = {
   label: string;
   value: number;
   total: number;
+  /** Valor en texto, desde content/ («29 de 47»). */
+  valueText: string;
 };
 
-/** Barras horizontales con etiqueta y valor en texto (adopción). */
-export function HorizontalBarChart({ rows }: { rows: readonly HBarRow[] }) {
+/** Barras horizontales con etiqueta y valor en texto (adopción). Las barras son decorativas. */
+export function HorizontalBarChart({ rows, label }: { rows: readonly HBarRow[]; label?: string }) {
   return (
-    <ul className="stack gap-18">
+    <ul className="hbar" aria-label={label}>
       {rows.map((row) => (
-        <li key={row.label} className="stack gap-6">
+        <li key={row.label} className="hbar__row">
           <div className="hbar__head">
             <span>{row.label}</span>
             <span className="hbar__value">
-              {row.value} de {row.total}
+              {row.valueText}
             </span>
           </div>
           <div className="hbar__track" aria-hidden="true">

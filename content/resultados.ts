@@ -75,7 +75,7 @@ export const adoption = {
     { label: "Universidad: completaron el ciclo", value: completedUniversity, total: approvals.total },
     { label: "Robótica: lo usaron", value: roboticsStudents, total: roboticsStudents },
     { label: "Robótica: completaron el ciclo", value: roboticsStudents, total: roboticsStudents },
-  ],
+  ].map((row) => ({ ...row, valueText: `${row.value} de ${row.total}` })),
   ariaLabel: "Adopción de Educai por grupo",
   reading: `${usedUniversity} de ${approvals.total} estudiantes (62 %) usaron Educai con asistencia estable, lo que sugiere uso fuera del aula.`,
   stats: [

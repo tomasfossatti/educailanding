@@ -1,78 +1,121 @@
 import type { Metadata } from "next";
-import { Button, TextLink } from "@/components/Button";
+import { TextLink } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { ChipList } from "@/components/Chip";
 import { CtaBand } from "@/components/CtaBand";
 import { Eyebrow } from "@/components/Eyebrow";
+import { LiteYouTube } from "@/components/LiteYouTube";
+import { MarginNote } from "@/components/MarginNote";
+import { MarginQuote } from "@/components/MarginQuote";
 import { PhotoFrame } from "@/components/PhotoFrame";
+import { plainText } from "@/components/RichText";
 import { Section } from "@/components/Section";
 import { SectionHeading } from "@/components/SectionHeading";
-import { contact, hero, perspective, projects, talks } from "@/content/quien-soy";
-import { EMAIL, PHOTOS, ROUTES, YOUTUBE_TEDX_URL } from "@/content/site";
-
-const title = "Tomás Fossatti";
-const description =
-  "Fundador de Educai. Hijo y nieto de docentes, emprendedor y estudiante en Córdoba, Argentina.";
+import { contact, hero, meta, origins, perspective, projects, talks } from "@/content/quien-soy";
+import {
+  EMAIL,
+  PHOTOS,
+  ROUTES,
+  WHATSAPP_CTA,
+  WHATSAPP_URL,
+  YOUTUBE_TEDX_ID,
+  YOUTUBE_TEDX_URL,
+} from "@/content/site";
 
 export const metadata: Metadata = {
-  title,
-  description,
+  title: meta.title,
+  description: meta.description,
   alternates: { canonical: ROUTES.quienSoy },
   openGraph: {
-    title,
-    description,
+    title: meta.title,
+    description: meta.description,
     url: ROUTES.quienSoy,
     type: "profile",
+    // En Quién soy, la foto TEDx queda como imagen para compartir propia.
+    images: [
+      {
+        url: PHOTOS.tedxEncendedorHero.src,
+        width: PHOTOS.tedxEncendedorHero.width,
+        height: PHOTOS.tedxEncendedorHero.height,
+        alt: PHOTOS.tedxEncendedorHero.alt,
+      },
+    ],
   },
+  twitter: { card: "summary_large_image", title: meta.title, description: meta.description },
 };
 
 export default function QuienSoyPage() {
   return (
     <>
-      {/* Hero */}
-      <Section variant="hero" layout="row" gap={56} align="center">
-        <div className="stack gap-24 basis-480">
+      {/* 1. Hero */}
+      <Section variant="hero" containerClassName="profile-hero">
+        <div className="stack gap-24">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
           <h1 className="h1">{hero.title}</h1>
-          <p className="lead measure-560">{hero.subtitle}</p>
+          <p className="lead">{hero.subtitle}</p>
           <ChipList items={hero.chips} />
         </div>
-        <PhotoFrame
-          photo={PHOTOS.tedxEncendedorHero}
-          ratio="portrait"
-          hero
-          preload
-          sizes="(max-width: 480px) 100vw, 380px"
-          className="hero-photo"
-        />
+        <div className="profile-hero__photo">
+          <MarginNote text={hero.photoNote} className="profile-hero__note" />
+          <PhotoFrame
+            photo={PHOTOS.tedxEncendedorHero}
+            ratio="portrait"
+            preload
+            border="lg"
+            sizes="(max-width: 640px) 100vw, 380px"
+            className="photo-frame--hero"
+          />
+        </div>
       </Section>
 
-      {/* Perspectiva */}
-      <Section tone="board" layout="row" gap={64} labelledBy="perspective-title">
-        <div className="stack gap-16 basis-380">
+      {/* 2. Perspectiva */}
+      <Section tone="board" containerClassName="split-grid" labelledBy="perspective-title">
+        <div className="stack gap-16">
           <Eyebrow>{perspective.eyebrow}</Eyebrow>
-          <h2 id="perspective-title" className="h2 h2--40">
+          <h2 id="perspective-title" className="h2">
             {perspective.title}
           </h2>
         </div>
-        <div className="stack gap-22 basis-480 body-lg">
-          <p>{perspective.question}</p>
+        <div className="stack gap-24">
+          <MarginQuote quote={perspective.question} size="lead" />
           {perspective.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph} className="body">
+              {paragraph}
+            </p>
           ))}
         </div>
       </Section>
 
-      {/* Proyectos */}
-      <Section labelledBy="projects-title">
+      {/* 3. De dónde vengo. TODO(material): sin foto familiar, se omite. */}
+      {origins.photo ? (
+        <Section containerClassName="split-grid" labelledBy="origins-title">
+          <PhotoFrame
+            photo={origins.photo}
+            ratio="landscape"
+            caption={origins.caption ?? undefined}
+            border="lg"
+            tilt="left"
+            sizes="(max-width: 900px) 100vw, 480px"
+          />
+          <div className="letter ruled">
+            <h2 id="origins-title" className="h2">
+              {origins.title}
+            </h2>
+            <p>{plainText(origins.paragraph)}</p>
+          </div>
+        </Section>
+      ) : null}
+
+      {/* 4. Proyectos */}
+      <Section tone="sheet" labelledBy="projects-title">
         <SectionHeading eyebrow={projects.eyebrow} title={projects.title} id="projects-title">
-          <p className="body-lg">{projects.intro}</p>
+          <p className="body">{projects.intro}</p>
         </SectionHeading>
-        <ul className="row gap-24">
+        <ul className="two-grid cascade">
           {projects.items.map((project) => (
-            <Card key={project.title} as="li" variant="sheet" padding="lg" gap={12} basis={420}>
-              <p className="eyebrow">{project.label}</p>
-              <h3 className="h3 h3--28">{project.title}</h3>
+            <Card key={project.title} as="li" variant="sheet" padding="lg" gap={12}>
+              <p className="label">{project.label}</p>
+              <h3 className="h3">{project.title}</h3>
               <p className="card-text">{project.text}</p>
               {project.link ? <TextLink href={ROUTES.inicio}>{project.link}</TextLink> : null}
             </Card>
@@ -80,87 +123,81 @@ export default function QuienSoyPage() {
         </ul>
       </Section>
 
-      {/* Exposiciones */}
-      <Section tone="sheet" gap={56} labelledBy="talks-title">
+      {/* 5. Exposiciones */}
+      <Section gap={64} labelledBy="talks-title">
         <SectionHeading eyebrow={talks.eyebrow} title={talks.title} id="talks-title" />
 
-        {/* TEDx */}
-        <div className="row items-center gap-48">
-          <div className="stack gap-18 basis-420">
-            <p className="eyebrow">{talks.tedx.label}</p>
-            <h3 className="h3 h3--32">{talks.tedx.title}</h3>
+        <div className="talk-grid">
+          <div className="stack gap-16">
+            <p className="label">{talks.tedx.label}</p>
+            <h3 className="h3 talk-title">{talks.tedx.title}</h3>
             <p className="body">{talks.tedx.text}</p>
-            <div className="row">
-              <Button href={YOUTUBE_TEDX_URL}>{talks.tedx.cta}</Button>
-            </div>
+            <TextLink href={YOUTUBE_TEDX_URL}>{talks.tedx.cta}</TextLink>
           </div>
-          <div className="row gap-20 basis-420">
-            <PhotoFrame
-              photo={PHOTOS.tedxEncendedor}
-              ratio="portrait"
-              sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 300px"
-              className="basis-180"
-            />
-            <PhotoFrame
-              photo={PHOTOS.tedxEscenario}
-              ratio="portrait"
-              sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 300px"
-              className="basis-180"
-            />
-          </div>
+          <LiteYouTube
+            id={YOUTUBE_TEDX_ID}
+            title={talks.tedx.title}
+            playLabel={talks.tedx.playLabel}
+            thumbAlt={talks.tedx.thumbAlt}
+          />
         </div>
 
-        {/* Ferias, congresos y sesiones con mentores */}
-        <div className="stack gap-28">
+        <div className="stack gap-32">
           <div className="stack gap-12 measure-760">
-            <h3 className="h3 h3--30">{talks.fairs.title}</h3>
+            <h3 className="h3">{talks.fairs.title}</h3>
             <p className="body">{talks.fairs.text}</p>
           </div>
-          <div className="row items-start gap-24">
+          <div className="collage">
             <PhotoFrame
               photo={PHOTOS.feria21Stand}
               ratio="landscape"
               caption={talks.fairs.captions.stand}
+              tilt="left"
               sizes="(max-width: 900px) 100vw, 720px"
-              className="basis-520"
+              className="collage__big"
             />
-            <div className="stack gap-24 basis-320">
+            <div className="collage__small">
               <PhotoFrame
                 photo={PHOTOS.feria21Visitantes}
                 ratio="landscape"
                 caption={talks.fairs.captions.visitantes}
-                sizes="(max-width: 900px) 100vw, 480px"
+                tilt="right"
+                sizes="(max-width: 900px) 100vw, 420px"
               />
               <PhotoFrame
                 photo={PHOTOS.meetTheMentors}
                 ratio="landscape"
                 caption={talks.fairs.captions.mentors}
-                sizes="(max-width: 900px) 100vw, 480px"
+                tilt="right"
+                sizes="(max-width: 900px) 100vw, 420px"
               />
             </div>
           </div>
         </div>
 
-        {/* Congreso y entrevista */}
-        <div className="row gap-24">
-          <Card variant="kraft" gap={10} basis={420}>
-            <p className="eyebrow">{talks.congress.label}</p>
-            <h3 className="h3 h3--22">{talks.congress.title}</h3>
+        {/* 6. Congreso y entrevista */}
+        <ul className="two-grid cascade">
+          <Card as="li" variant="kraft" gap={10}>
+            <p className="label">{talks.congress.label}</p>
+            <h3 className="h3">{talks.congress.title}</h3>
             <TextLink href={ROUTES.resultados}>{talks.congress.link}</TextLink>
           </Card>
-          <Card variant="kraft" gap={10} basis={420}>
-            <p className="eyebrow">{talks.interview.label}</p>
-            <h3 className="h3 h3--22">{talks.interview.title}</h3>
-            <p className="small-text">{talks.interview.text}</p>
+          <Card as="li" variant="kraft" gap={10}>
+            <p className="label">{talks.interview.label}</p>
+            <h3 className="h3">{talks.interview.title}</h3>
+            <p className="card-text">{talks.interview.text}</p>
           </Card>
-        </div>
+        </ul>
       </Section>
 
+      {/* 7. Contacto */}
       <CtaBand
+        id="contacto"
         eyebrow={contact.eyebrow}
         title={contact.title}
         text={contact.text}
         cta={{ href: `mailto:${EMAIL}`, label: contact.cta }}
+        secondary={WHATSAPP_URL ? { href: WHATSAPP_URL, label: WHATSAPP_CTA } : null}
       />
     </>
   );
